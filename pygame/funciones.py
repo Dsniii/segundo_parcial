@@ -3,7 +3,7 @@ import pygame
 import sys
 import pygame.mixer as mixer 
 import random
-
+import os
 
 
 
@@ -15,48 +15,48 @@ def mostrar_menu ():
     mixer.init()
 
     # Música
-    mixer.music.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
+    mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
     mixer.music.set_volume(0.4)
     mixer.music.play(-1)  
 
     #Efecto boton. 
-    efecto_button = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
+    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
 
 
     # Cargar imágenes
-    imagen_fondo = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
 
-    button_nivel = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png.png')
+    button_nivel = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png.png')
     button_nivel = pygame.transform.scale(button_nivel, (200, 70))
-    button_nivel_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png_presionado.png')
+    button_nivel_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png_presionado.png')
     button_nivel_presionado = pygame.transform.scale(button_nivel_presionado, (200, 70))
 
-    button_jugar = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png.png')
+    button_jugar = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png.png')
     button_jugar = pygame.transform.scale(button_jugar, (200, 70))
-    button_jugar_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png_presionado.png')
+    button_jugar_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png_presionado.png')
     button_jugar_presionado = pygame.transform.scale(button_jugar_presionado, (200, 70))
 
-    button_ver_puntaje = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png.png')
+    button_ver_puntaje = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png.png')
     button_ver_puntaje = pygame.transform.scale(button_ver_puntaje, (200, 70))
-    button_ver_puntaje_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png_presionado.png')
+    button_ver_puntaje_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png_presionado.png')
     button_ver_puntaje_presionado = pygame.transform.scale(button_ver_puntaje_presionado, (200, 70))
 
-    button_salir = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
+    button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
-    button_salir_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
     button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
 
-    button_musica_on = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png.png')
+    button_musica_on = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png.png')
     button_musica_on = pygame.transform.scale(button_musica_on, (70, 70))
-    button_musica_on_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png_presionado.png')
+    button_musica_on_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png_presionado.png')
     button_musica_on_presionado = pygame.transform.scale(button_musica_on_presionado, (70, 70))
     
 
-    button_musica_off = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png.png')
+    button_musica_off = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png.png')
     button_musica_off = pygame.transform.scale(button_musica_off, (70, 70))
-    button_musica_off_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png_presionado.png')
+    button_musica_off_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png_presionado.png')
     button_musica_off_presionado = pygame.transform.scale(button_musica_off_presionado, (70, 70))
 
     # Configuración de pantalla
@@ -214,32 +214,32 @@ def mostrar_niveles(efecto_activado:bool):
   
 
     #Efecto boton.
-    efecto_button = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
+    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
 
 
     # Cargar imágenes
-    imagen_fondo = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
 
-    button_nivel_facil = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png.png')
+    button_nivel_facil = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png.png')
     button_nivel_facil = pygame.transform.scale(button_nivel_facil, (200, 70))
-    button_nivel_facil_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png_presionado.png')
+    button_nivel_facil_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png_presionado.png')
     button_nivel_facil_presionado = pygame.transform.scale(button_nivel_facil_presionado, (200, 70))
 
-    button_nivel_medio = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png.png')
+    button_nivel_medio = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png.png')
     button_nivel_medio = pygame.transform.scale(button_nivel_medio, (200, 70))
-    button_nivel_medio_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png_presionado.png')
+    button_nivel_medio_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png_presionado.png')
     button_nivel_medio_presionado = pygame.transform.scale(button_nivel_medio_presionado, (200, 70))
 
-    button_nivel_dificil = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png.png')
+    button_nivel_dificil = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png.png')
     button_nivel_dificil = pygame.transform.scale(button_nivel_dificil, (200, 70))
-    button_nivel_dificil_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png_presionado.png')
+    button_nivel_dificil_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png_presionado.png')
     button_nivel_dificil_presionado = pygame.transform.scale(button_nivel_dificil_presionado, (200, 70))
 
-    button_salir = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
+    button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
-    button_salir_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
     button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
 
 
@@ -350,21 +350,21 @@ def mostrar_puntajes (efecto_activado:bool):
   
 
     #Efecto boton.
-    efecto_button = mixer.Sound('C:/Users/dsni/Desktop/recursos_musica/ruido_boton.mp3')
+    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
 
 
     # Cargar imágenes
-    imagen_fondo = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
 
-    lista_puntaje = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/lista_ver_puntaje_png.png')
+    lista_puntaje = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/lista_ver_puntaje_png.png')
     lista_puntaje = pygame.transform.scale(lista_puntaje, (500, 400))
  
 
-    button_salir = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/button_salir_png.png')
+    button_salir = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
-    button_salir_presionado = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/button_salir_png_presionado.png')
     button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
 
 
@@ -388,19 +388,10 @@ def mostrar_puntajes (efecto_activado:bool):
         
         for evento in pygame.event.get():
 
-            
-
-
             PANTALLA.blit(imagen_fondo, (0, 0))
             PANTALLA.blit(lista_puntaje, rectangulo_vertical)
 
-        
-        
-
             pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
-             
-            
-                    
 
             if rectangulo_vertical2.collidepoint(pos_mouse):
                 imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
@@ -417,19 +408,29 @@ def mostrar_puntajes (efecto_activado:bool):
 
 
 
+
             pygame.display.flip()  
 
 
 
-import os
-import sys
-import pygame
-from pygame import mixer
+
 
 def generar_nivel(tipo_nivel: int):
     # Inicialización
     pygame.init()
     mixer.init()
+
+
+
+    button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
+    button_salir = pygame.transform.scale(button_salir, (200, 70))
+    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
+
+    rectangulo_vertical4 = button_salir.get_rect(x=300, y=700)
+    rectangulo_vertical4_presionado = button_salir_presionado.get_rect(x=300, y=700)
+
+
 
     # Obtener ruta base del proyecto (independiente del usuario)
     base_path = os.path.dirname(os.path.abspath(__file__))
@@ -457,24 +458,45 @@ def generar_nivel(tipo_nivel: int):
     FPS = 25
     clock = pygame.time.Clock()
 
-    # Colores y configuración del tablero
-    agua = (0, 0, 255)
-    barco_tocado = (0, 255, 0)
-    fallo = (255, 0, 0)
-    margen = 5
-    ancho_casilla = 20
-
     # Determinar tamaño del tablero según nivel
     if tipo_nivel == 1:
         filas, columnas = 10, 10
     elif tipo_nivel == 2:
         filas, columnas = 20, 20
     else:  # tipo_nivel == 3
-        filas, columnas = 30, 30  # Reducido de 40x40 para mejor visualización
+        filas, columnas = 40, 40  # Reducido de 40x40 para mejor visualización
 
     # Crear y poblar matriz
     matriz = iniciar_matriz(filas, columnas, 0)
-    #matriz = colocar_barcos(matriz, tipo_nivel)
+    matriz = colocar_barcos(matriz, tipo_nivel)
+
+    matriz_jugador = iniciar_matriz(filas, columnas, 0)
+
+
+    coordenadas_x = []
+    coordenadas_y = []
+
+    for i in range(filas):
+        for x in range(columna):
+            if matriz[i][x] == 1:
+                coordenadas_x.append(i)
+                coordenadas_y.append(x)
+                
+
+    margen = 2
+    ancho_casilla = min(
+        (500 - (columnas + 1) * margen) // columnas,
+        (500 - (filas + 1) * margen) // filas
+    )
+    
+    # Calcular offsets para centrado
+    tablero_ancho = columnas * (ancho_casilla + margen) + margen
+    tablero_alto = filas * (ancho_casilla + margen) + margen
+    offset_x = (800 - tablero_ancho) // 2  # 800 es ANCHO de tu pantalla
+    offset_y = (800 - tablero_alto) // 2   # 800 es ALTO de tu pantalla
+
+    
+
 
     # Bucle principal del juego
     running = True
@@ -482,74 +504,137 @@ def generar_nivel(tipo_nivel: int):
         clock.tick(FPS)
         
         for evento in pygame.event.get():
-            if evento.type == pygame.QUIT:
-                running = False
-            elif evento.type == pygame.MOUSEBUTTONDOWN:
-                # Reproducir sonido de botón
-                efecto_button.play()
-                
-                # Obtener celda clickeada
-                x, y = evento.pos
-                celda = obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen)
-                if celda:
-                    fila, col = celda
-                    # Lógica para manejar el click en la celda
-                    # ...
+            
+           
 
-        # Dibujar
-        PANTALLA.blit(imagen_fondo, (0, 0))
-        dibujar_tablero(matriz, filas, columnas, 500, 500, PANTALLA)
-        pygame.display.flip()
+            
 
-    pygame.quit()
-    sys.exit()
+            pos_mouse = pygame.mouse.get_pos()
+        
+            celda = obtener_celda_click(
+                pos_mouse[0], 
+                pos_mouse[1],
+                filas=filas,
+                columnas=columnas,
+                ancho_casilla=ancho_casilla,
+                margen=margen,
+                offset_x=offset_x,
+                offset_y=offset_y
+            )
 
-def obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen):
-    """Obtiene la celda del tablero basada en coordenadas de pantalla"""
-    col = x // (ancho_casilla + margen)
-    fila = y // (ancho_casilla + margen)
+            if celda:
+                fila, columna = celda
+                print(f"Click en fila {fila}, columna {columna}")
+                # Aquí tu lógica para manejar el click
+                if evento.type == pygame.MOUSEBUTTONDOWN:
+                    print("presiona")
+                    
+
+
+                    if matriz[fila][columna] == (matriz_jugador[fila][columna] + 1):
+                        matriz_jugador[fila][columna] = (matriz_jugador[fila][columna]) + 1
+                    else:
+                        matriz_jugador[fila][columna] = 2
+
+                    
+
+            
+
+
+            # Dibujar
+            PANTALLA.blit(imagen_fondo, (0, 0))
+            dibujar_tablero(matriz_jugador, filas, columnas, 500, 500, PANTALLA)
+
+            if rectangulo_vertical4.collidepoint(pos_mouse):
+                imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
+                PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical4_presionado.x - 10, rectangulo_vertical4_presionado.y - 5))  # Ajustar posición
+                if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                    
+                    if rectangulo_vertical4_presionado.collidepoint(evento.pos):
+                        
+                        time.sleep(0.5)
+                        pygame.quit()
+                        mostrar_menu()
+            else:  
+                PANTALLA.blit(button_salir, rectangulo_vertical4)
+
+
+
+            pygame.display.flip()
+
+    
+
+def obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen, offset_x, offset_y):
+    """
+    Versión corregida que considera el tablero centrado
+    Args:
+        x, y: Coordenadas del mouse (píxeles)
+        filas, columnas: Tamaño del tablero
+        ancho_casilla: Ancho de cada celda en píxeles
+        margen: Espacio entre celdas
+        offset_x, offset_y: Desplazamiento del tablero desde los bordes
+    Returns:
+        Tuple (fila, columna) o None si click fuera del tablero
+    """
+    # Ajustar coordenadas restando el offset
+    x_rel = x - offset_x
+    y_rel = y - offset_y
+    
+    # Si el click está fuera del área del tablero
+    if x_rel < 0 or y_rel < 0:
+        return None
+    
+    # Calcular posición relativa considerando márgenes
+    col = x_rel // (ancho_casilla + margen)
+    fila = y_rel // (ancho_casilla + margen)
+    
+    # Verificar límites del tablero
     if 0 <= fila < filas and 0 <= col < columnas:
         return (fila, col)
     return None
 
 
-def dibujar_tablero(matriz, filas, columnas, area_ancho, area_alto, pantalla):
-    """Dibuja el tablero adaptado a un área fija (area_ancho x area_alto) y centrado"""
-    font = pygame.font.Font(None, 20)
-    pantalla_ancho, pantalla_alto = pantalla.get_size()
 
-    # Calcula el tamaño máximo de cada celda para que quepa en el área
-    margen = 2  # Puedes ajustar el margen entre celdas
+def dibujar_tablero(matriz, filas, columnas, area_ancho, area_alto, pantalla):
+    """Dibuja el tablero con imágenes en lugar de colores"""
+    # Cargar las imágenes (hazlo una vez al inicio del juego)
+    agua_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/agua_nivel_png.png')
+    barco_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/barco_golpeado_png.png')
+    fallo_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/agua_nivel_fallo_png.png')
+    
+    # Escalar las imágenes al tamaño de las celdas
+    margen = 2
     ancho_casilla = min(
         (area_ancho - (columnas + 1) * margen) // columnas,
         (area_alto - (filas + 1) * margen) // filas
     )
+    
+    # Escalar imágenes al tamaño de la celda
+    agua_img = pygame.transform.scale(agua_img, (ancho_casilla, ancho_casilla))
+    barco_img = pygame.transform.scale(barco_img, (ancho_casilla, ancho_casilla))
+    fallo_img = pygame.transform.scale(fallo_img, (ancho_casilla, ancho_casilla))
 
-    # Calcula el tamaño real del tablero
-    tablero_ancho = columnas * ancho_casilla + (columnas + 1) * margen
-    tablero_alto = filas * ancho_casilla + (filas + 1) * margen
-
-    # Centra el tablero en la pantalla
-    offset_x = (pantalla_ancho - tablero_ancho) // 2
-    offset_y = (pantalla_alto - tablero_alto) // 2
+    # Calcular posición del tablero
+    tablero_ancho = columnas * (ancho_casilla + margen) + margen
+    tablero_alto = filas * (ancho_casilla + margen) + margen
+    offset_x = (pantalla.get_width() - tablero_ancho) // 2
+    offset_y = (pantalla.get_height() - tablero_alto) // 2
 
     for fila in range(filas):
         for col in range(columnas):
-            # Color según el estado de la celda
-            if matriz[fila][col] == 0:
-                color = (0, 0, 255)
-            elif matriz[fila][col] == 1:
-                color = (100, 100, 100)
-            elif matriz[fila][col] == 2:
-                color = (0, 255, 0)
-            else:
-                color = (255, 0, 0)
-
             x = offset_x + (margen + ancho_casilla) * col + margen
             y = offset_y + (margen + ancho_casilla) * fila + margen
-
+            
+            # Seleccionar imagen según el estado de la celda
+            if matriz[fila][col] == 0:  # Agua
+                pantalla.blit(agua_img, (x, y))
+            elif matriz[fila][col] == 1:  # Fallo
+                pantalla.blit(barco_img, (x, y))
+            else:  # Barco
+                pantalla.blit(fallo_img, (x, y))
+            
+            # Opcional: mantener el borde negro
             rect = pygame.Rect(x, y, ancho_casilla, ancho_casilla)
-            pygame.draw.rect(pantalla, color, rect)
             pygame.draw.rect(pantalla, (0, 0, 0), rect, 1)
 
         
@@ -670,71 +755,6 @@ def colocar_barcos(matriz, dificultad):
     
     return matriz
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen):
-    """Convierte coordenadas de pantalla a coordenadas de matriz"""
-    col = x // (ancho_casilla + margen)
-    fila = y // (ancho_casilla + margen)
-    if 0 <= fila < filas and 0 <= col < columnas:
-        return fila, col
-    return None
 
 
 
