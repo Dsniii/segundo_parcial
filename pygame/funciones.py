@@ -96,7 +96,7 @@ def mostrar_menu ():
     rectangulo_vertical6 = button_musica_off.get_rect(x=700, y=20)
     rectangulo_vertical6_presionado = button_musica_off_presionado.get_rect(x=700, y=20)
 
-    efecto_activado = True
+   
 
     condicion_musica = True
 
@@ -128,65 +128,70 @@ def mostrar_menu ():
         
         pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
             # Verificar colisión con un rectángulo (botón, imagen, etc.)
+
+        #Boton nivel
         if rectangulo_vertical.collidepoint(pos_mouse):
             imagen_agrandada = pygame.transform.scale(button_nivel_presionado, (220, 80))  # +20px
             PANTALLA.blit(imagen_agrandada, (rectangulo_vertical_presionado.x - 10, rectangulo_vertical_presionado.y - 5))  # Ajustar posición
             if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                 
                 if rectangulo_vertical_presionado.collidepoint(evento.pos):
-                    if efecto_activado:
-                        efecto_boton(efecto_activado)
+              
+                    efecto_boton(condicion_musica)
                     time.sleep(0.5)
-                    mostrar_niveles(efecto_activado, condicion_musica)
+                    mostrar_niveles(condicion_musica)
 
         else:  
             PANTALLA.blit(button_nivel, rectangulo_vertical)
                 
+        #Boton jugar
         if rectangulo_vertical2.collidepoint(pos_mouse):
             imagen_agrandada_2 = pygame.transform.scale(button_jugar_presionado, (220, 80))  # +20px
             PANTALLA.blit(imagen_agrandada_2, (rectangulo_vertical2_presionado.x - 10, rectangulo_vertical2_presionado.y - 5))  # Ajustar posición
             if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                 
                 if rectangulo_vertical2_presionado.collidepoint(evento.pos):
-                    if efecto_activado:
-                        efecto_boton(efecto_activado)
+
+                    efecto_boton(condicion_musica)
                     time.sleep(0.5)
                     numero = random.randint(1,3)
-                    generar_nivel(int(numero))
+                    generar_nivel(int(numero),condicion_musica)
                     
                     
         else:  
             PANTALLA.blit(button_jugar, rectangulo_vertical2)
 
+        #Boton puntaje
         if rectangulo_vertical3.collidepoint(pos_mouse):
             imagen_agrandada_3 = pygame.transform.scale(button_ver_puntaje_presionado, (220, 80))  # +20px
             PANTALLA.blit(imagen_agrandada_3, (rectangulo_vertical3_presionado.x - 10, rectangulo_vertical3_presionado.y - 5))  # Ajustar posición
             if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                 
                 if rectangulo_vertical3_presionado.collidepoint(evento.pos):
-                    if efecto_activado:
-                        efecto_boton(efecto_activado)
+
+                    efecto_boton(condicion_musica)
                     time.sleep(0.5)
-                    mostrar_puntajes(efecto_activado)
+                    mostrar_puntajes(condicion_musica)
         else:  
             PANTALLA.blit(button_ver_puntaje, rectangulo_vertical3)
         
+        #Boton salir
         if rectangulo_vertical4.collidepoint(pos_mouse):
             imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
             PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical4_presionado.x - 10, rectangulo_vertical4_presionado.y - 5))  # Ajustar posición
             if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                 
                 if rectangulo_vertical4_presionado.collidepoint(evento.pos):
-                    if efecto_activado:
-                        efecto_boton(efecto_activado)
+  
+                    efecto_boton(condicion_musica)
                     time.sleep(0.5)
                     pygame.quit()
                     sys.exit()
         else:  
             PANTALLA.blit(button_salir, rectangulo_vertical4)
         
-
-        if efecto_activado:
+        #Boton sonido
+        if condicion_musica:
 
             if rectangulo_vertical5.collidepoint(pos_mouse):
                 imagen_agrandada_5 = pygame.transform.scale(button_musica_on_presionado, (90, 90))  # +20px
@@ -194,9 +199,9 @@ def mostrar_menu ():
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1: 
                     
                     if rectangulo_vertical5_presionado.collidepoint(evento.pos) :
-                        efecto_activado = False
-                        efecto_boton(efecto_activado)
+                    
                         condicion_musica = True
+                        efecto_boton(condicion_musica)
                         musica_ambiental(condicion_musica)   
                         time.sleep(0.5)  
             else:  
@@ -211,7 +216,7 @@ def mostrar_menu ():
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                     
                     if rectangulo_vertical6_presionado.collidepoint(evento.pos):
-                        efecto_activado = True
+                        
                         mixer.music.stop() 
                         condicion_musica = False
                         time.sleep(0.5)        
@@ -222,17 +227,18 @@ def mostrar_menu ():
         pygame.display.flip()   
 
 
-def mostrar_niveles(efecto_activado:bool, condicion_musica:bool):
+def mostrar_niveles(condicion_musica:bool):
     
     # Inicialización
     pygame.init()
     mixer.init()
 
-  
-
+    
+    """
     #Efecto boton.
     efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
+    """
 
 
     # Cargar imágenes
@@ -292,7 +298,7 @@ def mostrar_niveles(efecto_activado:bool, condicion_musica:bool):
 
             PANTALLA.blit(imagen_fondo, (0, 0))
 
-        
+
         
 
             pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
@@ -303,8 +309,8 @@ def mostrar_niveles(efecto_activado:bool, condicion_musica:bool):
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                     
                     if rectangulo_vertical_presionado.collidepoint(evento.pos):
-                        if efecto_activado:
-                            efecto_button.play()
+                        
+                        efecto_boton(condicion_musica)
                         time.sleep(0.5)
                         generar_nivel(1)
                             
@@ -318,8 +324,8 @@ def mostrar_niveles(efecto_activado:bool, condicion_musica:bool):
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                     
                     if rectangulo_vertical2_presionado.collidepoint(evento.pos):
-                        if efecto_activado:
-                            efecto_button.play()
+                        
+                        efecto_boton(condicion_musica)
                         time.sleep(0.5)
                         generar_nivel(2)
                             
@@ -332,8 +338,8 @@ def mostrar_niveles(efecto_activado:bool, condicion_musica:bool):
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                     
                     if rectangulo_vertical3_presionado.collidepoint(evento.pos):
-                        if efecto_activado:
-                            efecto_button.play()
+                        
+                        efecto_boton(condicion_musica)
                         time.sleep(0.5)
                         generar_nivel(3)
                             
@@ -346,8 +352,8 @@ def mostrar_niveles(efecto_activado:bool, condicion_musica:bool):
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                     
                     if rectangulo_vertical4_presionado.collidepoint(evento.pos):
-                        if efecto_activado:
-                            efecto_button.play()
+                        
+                        efecto_boton(condicion_musica)
                         time.sleep(0.5)
                         mostrar_menu()
                         
@@ -359,17 +365,17 @@ def mostrar_niveles(efecto_activado:bool, condicion_musica:bool):
             pygame.display.flip()   
 
 
-def mostrar_puntajes (efecto_activado:bool):
+def mostrar_puntajes (condicion_musica:bool):
     # Inicialización
     pygame.init()
     mixer.init()
 
   
-
+    """
     #Efecto boton.
     efecto_button = mixer.Sound('C:/Users/Matias/Desktop/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
-
+    """
 
     # Cargar imágenes
     imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/fondo_menu_png.png')
@@ -397,7 +403,7 @@ def mostrar_puntajes (efecto_activado:bool):
     rectangulo_vertical2 = button_salir.get_rect(x=300, y=460)
     rectangulo_vertical2_presionado = button_salir_presionado.get_rect(x=300, y=460)
 
-
+ 
 
     # Bucle principal
     while True:
@@ -416,8 +422,8 @@ def mostrar_puntajes (efecto_activado:bool):
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                     
                     if rectangulo_vertical2_presionado.collidepoint(evento.pos):
-                        if efecto_activado:
-                            efecto_button.play()
+                        
+                        efecto_boton(condicion_musica)
                         time.sleep(0.5)
                         mostrar_menu()
             else:  
@@ -432,10 +438,16 @@ def mostrar_puntajes (efecto_activado:bool):
 
 
 
-def generar_nivel(tipo_nivel: int):
+def generar_nivel(tipo_nivel: int, condicion_musica:bool):
     # Inicialización
     pygame.init()
     mixer.init()
+
+    mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_jugando.mp3')
+    mixer.music.set_volume(0.4)  # Empieza en silencio
+    mixer.music.play(-1)  # Reproduce en bucle con un fade-in de 1 segundo
+    if condicion_musica:   
+        mixer.music.play()
 
     efecto_agua_fallo = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_agua_fallo.mp3')
     efecto_agua_fallo.set_volume(0.4)
@@ -466,10 +478,7 @@ def generar_nivel(tipo_nivel: int):
     
     # Cargar recursos con rutas relativas
     try:
-        # Efecto botón
-        efecto_button_path = os.path.join(base_path, 'recursos_musica', 'ruido_boton.mp3')
-        efecto_button = mixer.Sound(efecto_button_path)
-        efecto_button.set_volume(0.4)
+
         
         # Imagen de fondo
         fondo_path = os.path.join(base_path, 'recursos_png', 'fondo_menu_png.png')
@@ -497,7 +506,7 @@ def generar_nivel(tipo_nivel: int):
 
     # Crear y poblar matriz
     matriz = iniciar_matriz(filas, columnas, 0)
-    matriz = colocar_barcos(matriz, tipo_nivel)
+    matriz, posiciones_barcos = colocar_barcos(matriz, tipo_nivel)
 
     matriz_jugador = iniciar_matriz(filas, columnas, 0)
 
@@ -531,6 +540,7 @@ def generar_nivel(tipo_nivel: int):
     running = True
     while running:
         clock.tick(FPS)
+        
         
         for evento in pygame.event.get():
             
@@ -566,13 +576,22 @@ def generar_nivel(tipo_nivel: int):
                         if (fila,columna) in coordenadas_barcos:
                             matriz_jugador[fila][columna] = matriz_jugador[fila][columna] + 1
                             print("Barco hundido")
+
+                            verificar_barcos_hundidos(matriz_jugador, coordenadas_barcos)  
+
                             coordenadas_y_recoridas.append((fila,columna))
+
+                             
+                            
+                        if condicion_musica:
                             efecto_golpe_barco.play()
+                            
                             
                         
                         else:
                             matriz_jugador[fila][columna] = 2 
-                            efecto_agua_fallo.play()
+                            if condicion_musica:
+                                efecto_agua_fallo.play()
                             
 
                     condicion = True
@@ -585,6 +604,8 @@ def generar_nivel(tipo_nivel: int):
             PANTALLA.blit(imagen_fondo, (0, 0))
             dibujar_tablero(matriz_jugador, filas, columnas, 500, 500, PANTALLA)
 
+            
+
             if rectangulo_vertical4.collidepoint(pos_mouse):
                 imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical4_presionado.x - 10, rectangulo_vertical4_presionado.y - 5))  # Ajustar posición
@@ -592,8 +613,9 @@ def generar_nivel(tipo_nivel: int):
                     
                     if rectangulo_vertical4_presionado.collidepoint(evento.pos):
                         
+                        efecto_boton(condicion_musica)
                         time.sleep(0.5)
-                        pygame.quit()
+                        
                         mostrar_menu()
             else:  
                 PANTALLA.blit(button_salir, rectangulo_vertical4)
@@ -606,9 +628,10 @@ def generar_nivel(tipo_nivel: int):
                     
                     if rectangulo_vertical_presionado.collidepoint(evento.pos):
                         
+                        efecto_boton(condicion_musica)
                         time.sleep(0.5)
-                        pygame.quit()
-                        generar_nivel(tipo_nivel)
+                        
+                        generar_nivel(tipo_nivel, condicion_musica)
             else:  
                 PANTALLA.blit(button_reiniciar, rectangulo_vertical)
 
@@ -616,7 +639,37 @@ def generar_nivel(tipo_nivel: int):
 
             pygame.display.flip()
 
+def verificar_barcos_hundidos(matriz_jugador, coordenadas_barcos):
+    """
+    Verifica si todos los barcos han sido hundidos y si finalizar el juego.
+    Args:
+        matriz_jugador: Matriz del jugador con los disparos realizados.
+        matriz_barcos: Matriz original con la ubicación de los barcos.
+    Returns:
+        True si todos los barcos están hundidos, False en caso contrario.
+    """
+    for fila in range(len(matriz_barcos)):
+        for col in range(len(matriz_barcos[0])):
+            if matriz_barcos[fila][col] == 1 and matriz_jugador[fila][col] != 1:
+                return False
+    return True 
+
+def verificar_hundido_nombres(matriz_disparos, barcos_info):
+    """
+    barcos_info = {
+        'destructor1': {'posiciones': [(1,2), (1,3)], 'hundido': False},
+        'submarino1': {'posiciones': [(2,5)], 'hundido': False}
+    }
+    """
+    hundidos = []
     
+    for nombre, info in barcos_info.items():
+        if not info['hundido']:
+            if all(matriz_disparos[f][c] == 1 for f, c in info['posiciones']):
+                info['hundido'] = True
+                hundidos.append(nombre)
+    
+    return hundidos
 
 def obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen, offset_x, offset_y):
     """
@@ -723,15 +776,15 @@ def iniciar_matriz(cant_filas:int, cant_columnas:int, valor_inicial: any) -> lis
     return matriz
 
 
-
+"""
 def colocar_barcos(matriz, dificultad):
-    """
+    
     Coloca barcos en la matriz según la dificultad:
     1 = Fácil (cantidad normal)
     2 = Medio (doble cantidad)
     3 = Difícil (triple cantidad)
     Los barcos no se tocarán entre sí (incluyendo diagonales)
-    """
+    
     filas = len(matriz)
     columnas = len(matriz[0])
     
@@ -809,32 +862,108 @@ def colocar_barcos(matriz, dificultad):
     
     return matriz
 
+"""
 
-
-
-
+def colocar_barcos(matriz, dificultad):
+    """
+    Coloca barcos en la matriz según la dificultad y retorna:
+    - matriz con barcos colocados
+    - diccionario con posiciones de cada barco
+    
+    Estructura del diccionario:
+    {
+        'submarino': [(f1,c1), (f2,c2), ...],
+        'destructor': [(f3,c3), (f4,c4), ...],
+        ...
+    }
+    """
+    filas = len(matriz)
+    columnas = len(matriz[0])
+    
+    # Definición de barcos
+    barcos_base = [
+        {'nombre': 'submarino', 'tamaño': 1, 'cantidad': 4},
+        {'nombre': 'destructor', 'tamaño': 2, 'cantidad': 3},
+        {'nombre': 'crucero', 'tamaño': 3, 'cantidad': 2},
+        {'nombre': 'acorazado', 'tamaño': 4, 'cantidad': 1}
+    ]
+    
+    # Ajustar cantidad según dificultad
+    multiplicador = 1
+    if dificultad == 2:
+        multiplicador = 2
+    elif dificultad == 3:
+        multiplicador = 3
+    
+    # Diccionario para guardar posiciones
+    posiciones_barcos = {barco['nombre']: [] for barco in barcos_base}
+    
+    # Lista de tamaños de barcos a colocar
+    barcos_a_colocar = []
+    for barco in barcos_base:
+        barcos_a_colocar.extend([(barco['nombre'], barco['tamaño'])] * (barco['cantidad'] * multiplicador))
+    
+    # Ordenar de mayor a menor para mejor colocación
+    barcos_a_colocar.sort(key=lambda x: x[1], reverse=True)
+    
+    for nombre, tamaño in barcos_a_colocar:
+        colocado = False
+        intentos = 0
+        posiciones_barco_actual = []
+        
+        while not colocado and intentos < 100:
+            intentos += 1
+            horizontal = random.choice([True, False])
+            posiciones_barco_actual = []
+            
+            if horizontal:
+                fila = random.randint(0, filas - 1)
+                col_inicio = random.randint(0, columnas - tamaño)
+                col_fin = col_inicio + tamaño
+                
+                # Verificar área alrededor del barco
+                espacio_libre = True
+                for col in range(max(0, col_inicio-1), min(columnas, col_fin+1)):
+                    for f in range(max(0, fila-1), min(filas, fila+2)):
+                        if matriz[f][col] != 0:
+                            espacio_libre = False
+                            break
+                    if not espacio_libre:
+                        break
+                
+                if espacio_libre:
+                    # Guardar posiciones y colocar barco
+                    for col in range(col_inicio, col_fin):
+                        matriz[fila][col] = 1
+                        posiciones_barco_actual.append((fila, col))
+                    colocado = True
+            else:
+                col = random.randint(0, columnas - 1)
+                fila_inicio = random.randint(0, filas - tamaño)
+                fila_fin = fila_inicio + tamaño
+                
+                # Verificar área alrededor del barco
+                espacio_libre = True
+                for fila in range(max(0, fila_inicio-1), min(filas, fila_fin+1)):
+                    for c in range(max(0, col-1), min(columnas, col+2)):
+                        if matriz[fila][c] != 0:
+                            espacio_libre = False
+                            break
+                    if not espacio_libre:
+                        break
+                
+                if espacio_libre:
+                    # Guardar posiciones y colocar barco
+                    for fila in range(fila_inicio, fila_fin):
+                        matriz[fila][col] = 1
+                        posiciones_barco_actual.append((fila, col))
+                    colocado = True
+        
+            if colocado:
+                posiciones_barcos[nombre].append(posiciones_barco_actual)
+    
+    return matriz, posiciones_barcos
 
 
     
 
-
-"""
-        if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
-            
-            if evento.button == 1:
-                print ("hizo click izquiero")
-            if evento.button == 3:
-                print ("hizo click derecho")
-            if rectangulo_vertical.collidepoint(evento.pos):
-                print("¡Acertaste!")
-            if rectangulo_vertical2.collidepoint(evento.pos):
-                print("¡Acertaste!")
-            if rectangulo_vertical3.collidepoint(evento.pos):
-                print("¡Acertaste!")
-            if rectangulo_vertical4.collidepoint(evento.pos):
-                print("¡Acertaste!")
-            if rectangulo_vertical5.collidepoint(evento.pos):
-                print("¡Acertaste!")
-            if rectangulo_vertical6.collidepoint(evento.pos):
-                print("¡Acertaste!")
-        """
