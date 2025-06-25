@@ -8,14 +8,14 @@ import os
 def musica_ambiental (condicion):
 
     if condicion:
-        mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
+        mixer.music.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
         mixer.music.set_volume(0.4)
         mixer.music.play(-1)  
         mixer.music.play()
 
 def efecto_boton (condicion):
     if condicion:
-        efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
+        efecto_button = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
         efecto_button.set_volume(0.4)
         efecto_button.play()
 
@@ -27,49 +27,49 @@ def mostrar_menu ():
     mixer.init()
 
     """
-    mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
+    mixer.music.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
     mixer.music.set_volume(0.4)
     mixer.music.play(-1)  
     """
     """
     #Efecto boton. 
-    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
+    efecto_button = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
     """
 
     # Cargar imágenes
-    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
 
-    button_nivel = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png.png')
+    button_nivel = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png.png')
     button_nivel = pygame.transform.scale(button_nivel, (200, 70))
-    button_nivel_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png_presionado.png')
+    button_nivel_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_nivel_png_presionado.png')
     button_nivel_presionado = pygame.transform.scale(button_nivel_presionado, (200, 70))
 
-    button_jugar = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png.png')
+    button_jugar = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png.png')
     button_jugar = pygame.transform.scale(button_jugar, (200, 70))
-    button_jugar_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png_presionado.png')
+    button_jugar_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_jugar_png_presionado.png')
     button_jugar_presionado = pygame.transform.scale(button_jugar_presionado, (200, 70))
 
-    button_ver_puntaje = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png.png')
+    button_ver_puntaje = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png.png')
     button_ver_puntaje = pygame.transform.scale(button_ver_puntaje, (200, 70))
-    button_ver_puntaje_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png_presionado.png')
+    button_ver_puntaje_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_ver_puntajes_png_presionado.png')
     button_ver_puntaje_presionado = pygame.transform.scale(button_ver_puntaje_presionado, (200, 70))
 
-    button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
+    button_salir = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
-    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
     button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
 
-    button_musica_on = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png.png')
+    button_musica_on = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png.png')
     button_musica_on = pygame.transform.scale(button_musica_on, (70, 70))
-    button_musica_on_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png_presionado.png')
+    button_musica_on_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png_presionado.png')
     button_musica_on_presionado = pygame.transform.scale(button_musica_on_presionado, (70, 70))
     
 
-    button_musica_off = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png.png')
+    button_musica_off = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png.png')
     button_musica_off = pygame.transform.scale(button_musica_off, (70, 70))
-    button_musica_off_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png_presionado.png')
+    button_musica_off_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png_presionado.png')
     button_musica_off_presionado = pygame.transform.scale(button_musica_off_presionado, (70, 70))
 
     # Configuración de pantalla
@@ -243,33 +243,33 @@ def mostrar_niveles(condicion_musica:bool):
     
     """
     #Efecto boton.
-    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
+    efecto_button = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
     """
 
 
     # Cargar imágenes
-    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
 
-    button_nivel_facil = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png.png')
+    button_nivel_facil = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png.png')
     button_nivel_facil = pygame.transform.scale(button_nivel_facil, (200, 70))
-    button_nivel_facil_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png_presionado.png')
+    button_nivel_facil_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_facil_png_presionado.png')
     button_nivel_facil_presionado = pygame.transform.scale(button_nivel_facil_presionado, (200, 70))
 
-    button_nivel_medio = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png.png')
+    button_nivel_medio = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png.png')
     button_nivel_medio = pygame.transform.scale(button_nivel_medio, (200, 70))
-    button_nivel_medio_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png_presionado.png')
+    button_nivel_medio_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_medio_png_presionado.png')
     button_nivel_medio_presionado = pygame.transform.scale(button_nivel_medio_presionado, (200, 70))
 
-    button_nivel_dificil = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png.png')
+    button_nivel_dificil = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png.png')
     button_nivel_dificil = pygame.transform.scale(button_nivel_dificil, (200, 70))
-    button_nivel_dificil_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png_presionado.png')
+    button_nivel_dificil_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_dificil_png_presionado.png')
     button_nivel_dificil_presionado = pygame.transform.scale(button_nivel_dificil_presionado, (200, 70))
 
-    button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
+    button_salir = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
-    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
     button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
 
 
@@ -380,21 +380,21 @@ def mostrar_puntajes (condicion_musica:bool):
   
     """
     #Efecto boton.
-    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/recursos_musica/ruido_boton.mp3')
+    efecto_button = mixer.Sound('C:/Users/dsni/Desktop/recursos_musica/ruido_boton.mp3')
     efecto_button.set_volume(0.4)
     """
 
     # Cargar imágenes
-    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
 
-    lista_puntaje = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/lista_ver_puntaje_png.png')
+    lista_puntaje = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/lista_ver_puntaje_png.png')
     lista_puntaje = pygame.transform.scale(lista_puntaje, (500, 400))
  
 
-    button_salir = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/button_salir_png.png')
+    button_salir = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
-    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.image.load('C:/Users/dsni/Desktop/recursos_png/button_salir_png_presionado.png')
     button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
 
 
@@ -453,27 +453,27 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
     
     
     if condicion_musica:   
-        mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_jugando.mp3')
+        mixer.music.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/musica_jugando.mp3')
         mixer.music.set_volume(0.4)  
         mixer.music.play(-1)
 
-    efecto_agua_fallo = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_agua_fallo.mp3')
+    efecto_agua_fallo = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_agua_fallo.mp3')
     efecto_agua_fallo.set_volume(0.4)
 
-    efecto_golpe_barco = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_golpe_barco.mp3')
+    efecto_golpe_barco = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_golpe_barco.mp3')
     efecto_golpe_barco.set_volume(0.4)
 
-    efecto_golpe_hundido = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_barco_hundido.mp3')
+    efecto_golpe_hundido = mixer.Sound('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_musica/ruido_barco_hundido.mp3')
     efecto_golpe_hundido.set_volume(5.0)
 
-    button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
+    button_salir = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
-    button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
+    button_salir_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
     button_salir_presionado = pygame.transform.scale(button_salir_presionado, (200, 70))
 
-    button_reiniciar = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_reiniciar_png.png')
+    button_reiniciar = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_reiniciar_png.png')
     button_reiniciar = pygame.transform.scale(button_reiniciar, (200, 70))
-    button_reiniciar_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_reiniciar_png_presionado.png')
+    button_reiniciar_presionado = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_reiniciar_png_presionado.png')
     button_reiniciar_presionado = pygame.transform.scale(button_reiniciar_presionado, (200, 70))
 
     rectangulo_vertical4 = button_salir.get_rect(x=430, y=680)
@@ -669,6 +669,69 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
 
             pygame.display.flip()
 
+def mostrar_puntaje_pantalla(puntaje_jugador, filas, columnas, pantalla):
+    #
+    texto_puntaje = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/button_reiniciar_png.png')
+    texto_puntaje = pygame.transform.scale(texto_puntaje, (200, 70))
+
+    texto_cero = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_0_png.png')
+    texto_cero = pygame.transform.scale(texto_cero, (200, 70))
+
+    texto_uno = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_1_png.png')
+    texto_uno = pygame.transform.scale(texto_uno, (200, 70))
+
+    texto_dos = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_2_png.png')
+    texto_dos = pygame.transform.scale(texto_dos, (200, 70))
+
+    texto_tres = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_3_png.png')
+    texto_tres = pygame.transform.scale(texto_tres, (200, 70))
+
+    texto_cuatro = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_4_png.png')
+    texto_cuatro = pygame.transform.scale(texto_cuatro, (200, 70))
+
+    texto_cinco = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_5_png.png')
+    texto_cinco = pygame.transform.scale(texto_cinco, (200, 70))
+
+    texto_seis = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_6_png.png')
+    texto_seis = pygame.transform.scale(texto_seis, (200, 70))
+    
+    texto_siete = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_7_png.png')
+    texto_siete = pygame.transform.scale(texto_siete, (200, 70))
+
+    texto_ocho = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_8_png.png')
+    texto_ocho = pygame.transform.scale(texto_ocho, (200, 70))
+    
+    texto_nueve = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/numero_9_png.png')
+    texto_nueve = pygame.transform.scale(texto_nueve, (200, 70))
+
+    for numero in range(puntaje_jugador):
+        if numero == 0:
+            pantalla.blit(texto_cero, (10, 10))
+        elif numero == 1:
+            pantalla.blit(texto_uno, (10, 10))
+        elif numero == 2:
+            pantalla.blit(texto_dos, (10, 10))
+        elif numero == 3:
+            pantalla.blit(texto_tres, (10, 10))
+        elif numero == 4:
+            pantalla.blit(texto_cuatro, (10, 10))
+        elif numero == 5:
+            pantalla.blit(texto_cinco, (10, 10))
+        elif numero == 6:
+            pantalla.blit(texto_seis, (10, 10))
+        elif numero == 7:
+            pantalla.blit(texto_siete, (10, 10))
+        elif numero == 8:
+            pantalla.blit(texto_ocho, (10, 10))
+        elif numero == 9:
+            pantalla.blit(texto_nueve, (10, 10))
+
+
+
+
+
+
+
 
 def todos_barcos_hundidos(coordenadas_barcos, matriz_disparos):
     """
@@ -714,9 +777,9 @@ def obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen, offset_x, 
 def dibujar_tablero(matriz, filas, columnas, area_ancho, area_alto, pantalla):
     """Dibuja el tablero con imágenes en lugar de colores"""
     # Cargar las imágenes (hazlo una vez al inicio del juego)
-    agua_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/agua_nivel_png.png')
-    barco_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/barco_golpeado_png.png')
-    fallo_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/agua_nivel_fallo_png.png')
+    agua_img = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/agua_nivel_png.png')
+    barco_img = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/barco_golpeado_png.png')
+    fallo_img = pygame.image.load('C:/Users/dsni/Desktop/segundo_parcial/pygame/recursos_png/agua_nivel_fallo_png.png')
     
     # Escalar las imágenes al tamaño de las celdas
     margen = 2
