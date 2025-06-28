@@ -156,6 +156,7 @@ def mostrar_menu ():
                     if condicion_efecto:
                         efecto_boton(True)
                     time.sleep(0.5)
+                    
                     numero = random.randint(1,3)
                     generar_nivel(int(numero),condicion_efecto)
                     
@@ -457,6 +458,9 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
         mixer.music.set_volume(0.4)  
         mixer.music.play(-1)
 
+    efecto_ganaste = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_de_ganaste.mp3')
+    efecto_ganaste.set_volume(0.4)
+    
     efecto_agua_fallo = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_agua_fallo.mp3')
     efecto_agua_fallo.set_volume(0.4)
 
@@ -465,6 +469,9 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
 
     efecto_golpe_hundido = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_barco_hundido.mp3')
     efecto_golpe_hundido.set_volume(5.0)
+
+    efecto_golpe_hundido_2 = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_señal.mp3')
+    efecto_golpe_hundido_2.set_volume(5.0)
 
     button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
@@ -599,12 +606,25 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
                             condicion_efecto = False
                              
                         if condicion_hundimiento:
+                            efecto_golpe_hundido_2.play()
                             
                             efecto_golpe_hundido.play()
                             condicion_hundimiento = False
                             puntaje_jugador = puntaje_jugador + (tamaño_hundido*10)
+                            
                             if todos_barcos_hundidos(coordenadas_barcos, matriz_jugador):
-                                print("Todos los barcos han sido hundidos")
+                                efecto_ganaste.play()
+                                time.sleep(2.0)
+                                ingresar_nombre_jugador(PANTALLA, condicion_musica, puntaje_jugador)
+                                
+                                
+                                    
+
+
+
+
+
+
 
                         elif condicion_musica and condicion_efecto:
                             efecto_golpe_barco.play()
@@ -665,6 +685,246 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
             mostrar_puntaje_pantalla(puntaje_jugador, PANTALLA)
 
             pygame.display.flip()
+
+def ingresar_nombre_jugador(PANTALLA, condicion_efecto,puntaje_jugador):
+    
+    
+
+    ANCHO, ALTO = 800, 400
+    PANTALLA = pygame.display.set_mode((ANCHO, ALTO))
+    FPS = 20
+    clock = pygame.time.Clock()
+    
+    boton_enter = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/boton_enter_png.png')
+    boton_enter = pygame.transform.scale(boton_enter, (200, 70))
+
+    boton_enter_presionando = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/boton_enter_presionado_png.png')
+    boton_enter_presionando = pygame.transform.scale(boton_enter_presionando, (200, 70))
+    
+    tabla_texto = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/cuadro_texto_png.png')
+    tabla_texto = pygame.transform.scale(tabla_texto, (450, 100))
+    
+    
+
+    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
+
+    # Rectángulos para los botones
+    rectangulo_vertical = boton_enter.get_rect(x=300, y=270)
+    rectangulo_vertical_presionado = boton_enter_presionando.get_rect(x=300, y=270)
+
+    nombre_jugador = ""
+    
+    while True:
+        clock.tick(FPS)
+        for evento in pygame.event.get():
+            
+            if evento.type == pygame.KEYDOWN:
+                
+                if len(nombre_jugador) <= 3:  # Limitar a 4 caracteres
+                    if evento.unicode.isalpha():
+                        print(f"Letra presionada: {evento.unicode}")
+                        nombre_jugador += evento.unicode.upper()  # Convertir a mayúscula
+                    elif evento.key == pygame.K_BACKSPACE:
+                        nombre_jugador = nombre_jugador[:-1]  # Borrar último carácter
+
+                
+            
+        
+
+        pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
+            # Verificar colisión con un rectángulo (botón, imagen, etc.)
+
+        PANTALLA.blit(imagen_fondo, (0, 0))
+
+        PANTALLA.blit(tabla_texto, (170, 150))
+
+
+        #Boton nivel
+        if rectangulo_vertical.collidepoint(pos_mouse):
+            imagen_agrandada = pygame.transform.scale(boton_enter_presionando, (220, 80))  # +20px
+            PANTALLA.blit(imagen_agrandada, (rectangulo_vertical_presionado.x - 10, rectangulo_vertical_presionado.y - 5))  # Ajustar posición
+            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                
+                if rectangulo_vertical_presionado.collidepoint(evento.pos):
+                    if condicion_efecto:
+                        efecto_boton(True)
+                    time.sleep(0.5)
+                    mostrar_menu()
+
+        else:  
+            PANTALLA.blit(boton_enter, rectangulo_vertical)
+                
+
+        mostrar_puntaje_pantalla(puntaje_jugador, PANTALLA )
+        
+        mostrar_texto_pantalla(nombre_jugador, PANTALLA)
+        pygame.display.flip()
+
+        pygame.display.flip()
+        
+
+   
+
+def registrar_puntaje(puntaje_jugador, tipo_nivel):
+    return
+
+def mostrar_texto_pantalla(texto, PANTALLA):
+
+   
+
+    texto_A = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_A_png.png')
+    texto_A = pygame.transform.scale(texto_A, (50, 60))
+    
+    texto_B = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_B_png.png')
+    texto_B = pygame.transform.scale(texto_B, (50, 60))
+
+    texto_C = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_C_png.png')
+    texto_C = pygame.transform.scale(texto_C, (50, 60))
+
+    texto_D = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_D_png.png')
+    texto_D = pygame.transform.scale(texto_D, (50, 60))
+
+    texto_E = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_E_png.png')
+    texto_E = pygame.transform.scale(texto_E, (50, 60))
+
+    texto_F = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_F_png.png')
+    texto_F = pygame.transform.scale(texto_F, (50, 60))
+
+    texto_G = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_G_png.png')
+    texto_G = pygame.transform.scale(texto_G, (50, 60))
+
+    texto_H = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_H_png.png')
+    texto_H = pygame.transform.scale(texto_H, (50, 60))
+
+    texto_I = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_I_png.png')
+    texto_I = pygame.transform.scale(texto_I, (50, 60))
+
+    texto_J = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_J_png.png')
+    texto_J = pygame.transform.scale(texto_J, (50, 60))
+
+    texto_K = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_K_png.png')
+    texto_K = pygame.transform.scale(texto_K, (50, 60))
+
+    texto_L = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_L_png.png')
+    texto_L = pygame.transform.scale(texto_L, (50, 60))
+
+    texto_M = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_M_png.png')
+    texto_M = pygame.transform.scale(texto_M, (50, 60))
+
+    texto_N = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_N_png.png')
+    texto_N = pygame.transform.scale(texto_N, (50, 60))
+
+    texto_O = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_O_png.png')
+    texto_O = pygame.transform.scale(texto_O, (50, 60))
+
+    texto_P = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_P_png.png')
+    texto_P = pygame.transform.scale(texto_P, (50, 60))
+
+    texto_Q = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_Q_png.png')
+    texto_Q = pygame.transform.scale(texto_Q, (50, 60))
+
+    texto_R = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_R_png.png')
+    texto_R = pygame.transform.scale(texto_R, (50, 60))
+
+    texto_S = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_S_png.png')
+    texto_S = pygame.transform.scale(texto_S, (50, 60))
+
+    texto_T = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_T_png.png')
+    texto_T = pygame.transform.scale(texto_T, (50, 60))
+
+    texto_U = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_U_png.png')
+    texto_U = pygame.transform.scale(texto_U, (50, 60))
+
+    texto_V = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_V_png.png')
+    texto_V = pygame.transform.scale(texto_V, (50, 60))
+
+    texto_W = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_W_png.png')
+    texto_W = pygame.transform.scale(texto_W, (50, 60))
+
+    texto_X = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_X_png.png')
+    texto_X = pygame.transform.scale(texto_X, (50, 60))
+
+    texto_Y = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_Y_png.png')
+    texto_Y = pygame.transform.scale(texto_Y, (50, 60))
+    
+    texto_Z = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_Z_png.png')
+    texto_Z = pygame.transform.scale(texto_Z, (50, 60))
+
+
+    # Posición base (como la tenías)
+    pos_x = 810
+    pos_y = 170
+    
+    # Convertir el puntaje a string
+    str_puntaje = str(texto)
+    
+    # Calcular el ancho total del puntaje
+    ancho_total = len(str_puntaje) * 55  # 75px por dígito (ajusta si es diferente)
+    
+    
+    # Calcular posición X inicial para centrar
+    pos_x_inicial = (pos_x - ancho_total) // 2
+    
+    # Mostrar cada dígito
+    for i, digito in enumerate(str_puntaje):
+        if digito == 'A':
+            PANTALLA.blit(texto_A, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'B':
+            PANTALLA.blit(texto_B, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'C':
+            PANTALLA.blit(texto_C, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'D':
+            PANTALLA.blit(texto_D, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'E':
+            PANTALLA.blit(texto_E, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'F':
+            PANTALLA.blit(texto_F, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'G':
+            PANTALLA.blit(texto_G, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'H':
+            PANTALLA.blit(texto_H, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'I':
+            PANTALLA.blit(texto_I, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'J':
+            PANTALLA.blit(texto_J, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'K':
+            PANTALLA.blit(texto_K, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'L':
+            PANTALLA.blit(texto_L, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'M':
+            PANTALLA.blit(texto_M, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'N':
+            PANTALLA.blit(texto_N, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'O':
+            PANTALLA.blit(texto_O, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'P':
+            PANTALLA.blit(texto_P, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'Q':
+            PANTALLA.blit(texto_Q, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'R':
+            PANTALLA.blit(texto_R, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'S':
+            PANTALLA.blit(texto_S, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'T':
+            PANTALLA.blit(texto_T, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'U':
+            PANTALLA.blit(texto_U, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'V':
+            PANTALLA.blit(texto_V, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'W':
+            PANTALLA.blit(texto_W, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'X':
+            PANTALLA.blit(texto_X, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'Y':
+            PANTALLA.blit(texto_Y, (pos_x_inicial + i*50, pos_y))
+        elif digito == 'Z':
+            PANTALLA.blit(texto_Z, (pos_x_inicial + i*50, pos_y))
+    
+    
+
+    
+
 
 def mostrar_puntaje_pantalla(puntaje_jugador, PANTALLA):
     #
