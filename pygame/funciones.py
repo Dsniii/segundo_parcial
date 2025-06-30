@@ -75,7 +75,7 @@ def mostrar_menu ():
 
     # Configuración de pantalla
     ANCHO, ALTO = 800, 600
-    PANTALLA = pygame.display.set_mode((ANCHO, ALTO))
+    PANTALLA = pygame.display.set_mode((ANCHO, ALTO),pygame.NOFRAME)
     FPS = 20
     clock = pygame.time.Clock()
 
@@ -277,7 +277,7 @@ def mostrar_niveles(condicion_musica:bool):
 
     # Configuración de pantalla
     ANCHO, ALTO = 800, 600
-    PANTALLA = pygame.display.set_mode((ANCHO, ALTO))
+    PANTALLA = pygame.display.set_mode((ANCHO, ALTO),pygame.NOFRAME)
     FPS = 25
     clock = pygame.time.Clock()
 
@@ -402,7 +402,7 @@ def mostrar_puntajes (condicion_musica:bool):
 
     # Configuración de pantalla
     ANCHO, ALTO = 800, 600
-    PANTALLA = pygame.display.set_mode((ANCHO, ALTO))
+    PANTALLA = pygame.display.set_mode((ANCHO, ALTO),pygame.NOFRAME)
     FPS = 25
     clock = pygame.time.Clock()
 
@@ -636,7 +636,7 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
 
     # Configuración de pantalla
     ANCHO, ALTO = 800, 800
-    PANTALLA = pygame.display.set_mode((ANCHO, ALTO))
+    PANTALLA = pygame.display.set_mode((ANCHO, ALTO),pygame.NOFRAME)
     pygame.display.set_caption(f"Batalla Naval - Nivel {tipo_nivel}")
     FPS = 25
     clock = pygame.time.Clock()
@@ -822,7 +822,7 @@ def ingresar_nombre_jugador(PANTALLA, condicion_efecto, puntaje_jugador, tipo_ni
     
 
     ANCHO, ALTO = 800, 400
-    PANTALLA = pygame.display.set_mode((ANCHO, ALTO))
+    PANTALLA = pygame.display.set_mode((ANCHO, ALTO),pygame.NOFRAME)
     FPS = 20
     clock = pygame.time.Clock()
     
@@ -1394,35 +1394,7 @@ def colocar_barcos(matriz, dificultad):
     return matriz, posiciones_barcos
 
 
-"""
-def verificar_hundidos(matriz_disparos, posiciones_barcos):
-   
-    Verifica qué barcos han sido completamente hundidos
-    
-    Args:
-        matriz_disparos: Matriz con 0 (no disparado), 1 (impacto), 2 (fallo)
-        posiciones_barcos: Diccionario de barcos y sus posiciones
-                         {'submarino': [[(f1,c1)], [(f2,c2)], ...],
-                          'destructor': [[(f3,c3), (f4,c4)], ...]}
-    
-    Returns:
-        Lista de tuplas con (nombre_barco, posiciones) de barcos recién hundidos
-   
-    #hundidos = []
-    condicion_hundidos = False
 
-
-    for nombre_barco, lista_barcos in posiciones_barcos.items():
-        # Hacemos una copia para poder modificar la lista mientras iteramos
-        for barco in list(lista_barcos):
-            # Verificamos si todas las posiciones del barco fueron impactadas
-            if all(matriz_disparos[f][c] == 1 for f, c in barco):
-                #hundidos.append((nombre_barco, barco))
-                condicion_hundidos = True
-                lista_barcos.remove(barco)  # Eliminar el barco hundido
-    
-    return condicion_hundidos
-"""
 
 def verificar_hundidos(matriz_disparos, posiciones_barcos):
     """
