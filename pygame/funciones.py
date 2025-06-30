@@ -6,39 +6,83 @@ import random
 import os
 import json
 
-def musica_ambiental (condicion):
 
+def musica_ambiental (condicion:bool):
+
+    """
+    Reproduce una musica ambiental en el menu de fondo mientras se ejecuta el juego.
+    
+    Args:
+    condicion: Determina si se reproduce la musica ambiental o no. Si es True, se reproduce la musica ambiental, si es False no se reproduce.
+
+    Returns:
+    None
+
+    """
+    
     if condicion:
         mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
         mixer.music.set_volume(0.4)
         mixer.music.play(-1)  
         mixer.music.play()
 
+
 def efecto_boton (condicion):
+
+    """
+    Reproduce un efecto de sonido al presionar un boton en el menu.
+    
+    Args:
+    condicion: Determina si se reproduce el efecto de sonido o no. Si es True, se reproduce el efecto de sonido, si es False no se reproduce.
+
+    Returns:
+    None
+
+    """
+
     if condicion:
         efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
         efecto_button.set_volume(0.4)
         efecto_button.play()
 
+
+def musica_jugando (condicion:bool):
+
+    """
+    reproduce la música ambiental del juego, permitiendo que el jugador escuche música mientras juega.
+    
+    Args:
+    condicion: Determina si se reproduce la musica ambiental o no. Si es True, se reproduce la musica ambiental, si es False no se reproduce.
+
+    Returns:
+    None
+
+    """
+    
+    if condicion:   
+        mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_jugando.mp3')
+        mixer.music.set_volume(0.4)  
+        mixer.music.play(-1)
+
+
 def mostrar_menu ():
     
+    """
+    Muestra el menú principal del juego con opciones para seleccionar niveles, jugar, ver puntajes, salir y mutear la música ambiental.
+    
+    Args:
+    None
+
+    Returns:
+    None
+
+    """
 
     # Inicialización
     pygame.init()
     mixer.init()
 
-    """
-    mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_ambiental.mp3')
-    mixer.music.set_volume(0.4)
-    mixer.music.play(-1)  
-    """
-    """
-    #Efecto boton. 
-    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
-    efecto_button.set_volume(0.4)
-    """
-
-    # Cargar imágenes
+    # Cargar imágen de fondo y botones
     imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
 
@@ -67,7 +111,6 @@ def mostrar_menu ():
     button_musica_on_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_on_png_presionado.png')
     button_musica_on_presionado = pygame.transform.scale(button_musica_on_presionado, (70, 70))
     
-
     button_musica_off = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png.png')
     button_musica_off = pygame.transform.scale(button_musica_off, (70, 70))
     button_musica_off_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_musica_off_png_presionado.png')
@@ -111,125 +154,112 @@ def mostrar_menu ():
         
         for evento in pygame.event.get():
 
-            if evento.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_DOWN:
-                    rectangulo_vertical.y += 100
-                if evento.key == pygame.K_UP:
-                    rectangulo_vertical.y += -100
-                if evento.key == pygame .K_RIGHT:
-                    rectangulo_vertical.x += 100
-                if evento.key == pygame .K_LEFT:
-                    rectangulo_vertical.x += -100
 
+            PANTALLA.blit(imagen_fondo, (0, 0))
 
-        PANTALLA.blit(imagen_fondo, (0, 0))
-
-        
-        
-        pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
+            
+            # Devuelve (x, y)
+            pos_mouse = pygame.mouse.get_pos() 
+            
             # Verificar colisión con un rectángulo (botón, imagen, etc.)
-
-        #Boton nivel
-        if rectangulo_vertical.collidepoint(pos_mouse):
-            imagen_agrandada = pygame.transform.scale(button_nivel_presionado, (220, 80))  # +20px
-            PANTALLA.blit(imagen_agrandada, (rectangulo_vertical_presionado.x - 10, rectangulo_vertical_presionado.y - 5))  # Ajustar posición
-            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
-                
-                if rectangulo_vertical_presionado.collidepoint(evento.pos):
-                    if condicion_efecto:
-                        efecto_boton(True)
-                    time.sleep(0.5)
-                    mostrar_niveles(condicion_efecto)
-
-        else:  
-            PANTALLA.blit(button_nivel, rectangulo_vertical)
-                
-        #Boton jugar
-        if rectangulo_vertical2.collidepoint(pos_mouse):
-            imagen_agrandada_2 = pygame.transform.scale(button_jugar_presionado, (220, 80))  # +20px
-            PANTALLA.blit(imagen_agrandada_2, (rectangulo_vertical2_presionado.x - 10, rectangulo_vertical2_presionado.y - 5))  # Ajustar posición
-            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
-                
-                if rectangulo_vertical2_presionado.collidepoint(evento.pos):
-                    if condicion_efecto:
-                        efecto_boton(True)
-                    time.sleep(0.5)
-                    
-                    numero = random.randint(1,3)
-                    generar_nivel(int(numero),condicion_musica)
-                    
-                    
-        else:  
-            PANTALLA.blit(button_jugar, rectangulo_vertical2)
-
-        #Boton puntaje
-        if rectangulo_vertical3.collidepoint(pos_mouse):
-            imagen_agrandada_3 = pygame.transform.scale(button_ver_puntaje_presionado, (220, 80))  # +20px
-            PANTALLA.blit(imagen_agrandada_3, (rectangulo_vertical3_presionado.x - 10, rectangulo_vertical3_presionado.y - 5))  # Ajustar posición
-            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
-                
-                if rectangulo_vertical3_presionado.collidepoint(evento.pos):
-                    if condicion_efecto:
-                        efecto_boton(True)
-                    time.sleep(0.5)
-                    mostrar_puntajes(condicion_efecto)
-        else:  
-            PANTALLA.blit(button_ver_puntaje, rectangulo_vertical3)
-        
-        #Boton salir
-        if rectangulo_vertical4.collidepoint(pos_mouse):
-            imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
-            PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical4_presionado.x - 10, rectangulo_vertical4_presionado.y - 5))  # Ajustar posición
-            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
-                
-                if rectangulo_vertical4_presionado.collidepoint(evento.pos):
-                    if condicion_efecto:
-                        efecto_boton(True)
-                    time.sleep(0.5)
-                    pygame.quit()
-                    sys.exit()
-        else:  
-            PANTALLA.blit(button_salir, rectangulo_vertical4)
-        
-        
-
-        #Boton sonido
-        if condicion_musica:
-
-            if rectangulo_vertical5.collidepoint(pos_mouse):
-                imagen_agrandada_5 = pygame.transform.scale(button_musica_on_presionado, (90, 90))  # +20px
-                PANTALLA.blit(imagen_agrandada_5, (rectangulo_vertical5_presionado.x - 10, rectangulo_vertical5_presionado.y - 5))  # Ajustar posición
-                if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1: 
-                    
-                    if rectangulo_vertical5_presionado.collidepoint(evento.pos) :
-                        print ("musica on")
-                        condicion_efecto = False 
-                        condicion_musica = False
-                        efecto_boton(True)
-                        musica_ambiental(True)   
-                        time.sleep(0.5)  
-            else:  
-                
-                PANTALLA.blit(button_musica_off, rectangulo_vertical6) 
-
-        else:
-
-            if rectangulo_vertical6.collidepoint(pos_mouse):
-                imagen_agrandada_6 = pygame.transform.scale(button_musica_off_presionado, (90, 90))  # +20px
-                PANTALLA.blit(imagen_agrandada_6, (rectangulo_vertical6_presionado.x - 10, rectangulo_vertical6_presionado.y - 5))  # Ajustar posición
+            #Boton nivel
+            if rectangulo_vertical.collidepoint(pos_mouse):
+                imagen_agrandada = pygame.transform.scale(button_nivel_presionado, (220, 80))  # +20px
+                PANTALLA.blit(imagen_agrandada, (rectangulo_vertical_presionado.x - 10, rectangulo_vertical_presionado.y - 5))  # Ajustar posición
                 if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
                     
-                    if rectangulo_vertical6_presionado.collidepoint(evento.pos):
-                        print ("musica off")
-                        mixer.music.stop()
-                        condicion_efecto = False 
-                        condicion_musica = False
-                        time.sleep(0.5)        
+                    if rectangulo_vertical_presionado.collidepoint(evento.pos):
+                        if condicion_efecto:
+                            efecto_boton(True)
+                        time.sleep(0.5)
+                        mostrar_niveles(condicion_efecto)
+
             else:  
-                PANTALLA.blit(button_musica_on, rectangulo_vertical5)
+                PANTALLA.blit(button_nivel, rectangulo_vertical)
+                    
+            #Boton jugar
+            if rectangulo_vertical2.collidepoint(pos_mouse):
+                imagen_agrandada_2 = pygame.transform.scale(button_jugar_presionado, (220, 80))  # +20px
+                PANTALLA.blit(imagen_agrandada_2, (rectangulo_vertical2_presionado.x - 10, rectangulo_vertical2_presionado.y - 5))  # Ajustar posición
+                if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                    
+                    if rectangulo_vertical2_presionado.collidepoint(evento.pos):
+                        if condicion_efecto:
+                            efecto_boton(True)
+                        time.sleep(0.5)
+                        
+                        numero = random.randint(1,3)
+                        generar_nivel(int(numero),condicion_musica)
+                        
+                        
+            else:  
+                PANTALLA.blit(button_jugar, rectangulo_vertical2)
+
+            #Boton puntaje
+            if rectangulo_vertical3.collidepoint(pos_mouse):
+                imagen_agrandada_3 = pygame.transform.scale(button_ver_puntaje_presionado, (220, 80))  # +20px
+                PANTALLA.blit(imagen_agrandada_3, (rectangulo_vertical3_presionado.x - 10, rectangulo_vertical3_presionado.y - 5))  # Ajustar posición
+                if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                    
+                    if rectangulo_vertical3_presionado.collidepoint(evento.pos):
+                        if condicion_efecto:
+                            efecto_boton(True)
+                        time.sleep(0.5)
+                        mostrar_puntajes(condicion_efecto)
+            else:  
+                PANTALLA.blit(button_ver_puntaje, rectangulo_vertical3)
+            
+            #Boton salir
+            if rectangulo_vertical4.collidepoint(pos_mouse):
+                imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
+                PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical4_presionado.x - 10, rectangulo_vertical4_presionado.y - 5))  # Ajustar posición
+                if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                    
+                    if rectangulo_vertical4_presionado.collidepoint(evento.pos):
+                        if condicion_efecto:
+                            efecto_boton(True)
+                        time.sleep(0.5)
+                        pygame.quit()
+                        sys.exit()
+            else:  
+                PANTALLA.blit(button_salir, rectangulo_vertical4)
+            
+            
+
+            #Boton sonido
+            if condicion_musica:
+
+                if rectangulo_vertical5.collidepoint(pos_mouse):
+                    imagen_agrandada_5 = pygame.transform.scale(button_musica_on_presionado, (90, 90))  # +20px
+                    PANTALLA.blit(imagen_agrandada_5, (rectangulo_vertical5_presionado.x - 10, rectangulo_vertical5_presionado.y - 5))  # Ajustar posición
+                    if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1: 
+                        
+                        if rectangulo_vertical5_presionado.collidepoint(evento.pos) :
+                            print ("musica on")
+                            condicion_efecto = False 
+                            condicion_musica = False
+                            efecto_boton(True)
+                            musica_ambiental(True)   
+                            time.sleep(0.5)  
+                else:  
+                    
+                    PANTALLA.blit(button_musica_off, rectangulo_vertical6) 
+
+            else:
+
+                if rectangulo_vertical6.collidepoint(pos_mouse):
+                    imagen_agrandada_6 = pygame.transform.scale(button_musica_off_presionado, (90, 90))  # +20px
+                    PANTALLA.blit(imagen_agrandada_6, (rectangulo_vertical6_presionado.x - 10, rectangulo_vertical6_presionado.y - 5))  # Ajustar posición
+                    if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                        
+                        if rectangulo_vertical6_presionado.collidepoint(evento.pos):
+                            print ("musica off")
+                            mixer.music.stop()
+                            condicion_efecto = False 
+                            condicion_musica = False
+                            time.sleep(0.5)        
+                else:  
+                    PANTALLA.blit(button_musica_on, rectangulo_vertical5)
 
 
 
@@ -238,16 +268,20 @@ def mostrar_menu ():
 
 def mostrar_niveles(condicion_musica:bool):
     
+    """
+    Muestra los niveles disponibles para jugar, permitiendo al usuario seleccionar entre fácil, medio y difícil, o salir al menú principal.
+    
+    Args:
+    condicion_musica: Determina si se reproduce la música ambiental o no. Si es True, se reproduce la música ambiental, si es False no se reproduce.
+
+    Returns:
+    None
+
+    """
+    
     # Inicialización
     pygame.init()
     mixer.init()
-
-    
-    """
-    #Efecto boton.
-    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_boton.mp3')
-    efecto_button.set_volume(0.4)
-    """
 
 
     # Cargar imágenes
@@ -302,16 +336,13 @@ def mostrar_niveles(condicion_musica:bool):
         
         for evento in pygame.event.get():
 
-            
-
-
             PANTALLA.blit(imagen_fondo, (0, 0))
-
-
         
-
-            pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
-                # Verificar colisión con un rectángulo (botón, imagen, etc.)
+            # Devuelve (x, y)
+            pos_mouse = pygame.mouse.get_pos()  
+            
+            # Verificar colisión con un rectángulo (botón, imagen, etc.)
+            # Boton nivel facil
             if rectangulo_vertical.collidepoint(pos_mouse):
                 imagen_agrandada = pygame.transform.scale(button_nivel_facil_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada, (rectangulo_vertical_presionado.x - 10, rectangulo_vertical_presionado.y - 5))  # Ajustar posición
@@ -322,11 +353,10 @@ def mostrar_niveles(condicion_musica:bool):
                         efecto_boton(condicion_musica)
                         time.sleep(0.5)
                         generar_nivel(1, condicion_musica)
-                            
-
             else:  
                 PANTALLA.blit(button_nivel_facil, rectangulo_vertical)
-                    
+
+            # Boton nivel medio        
             if rectangulo_vertical2.collidepoint(pos_mouse):
                 imagen_agrandada_2 = pygame.transform.scale(button_nivel_medio_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada_2, (rectangulo_vertical2_presionado.x - 10, rectangulo_vertical2_presionado.y - 5))  # Ajustar posición
@@ -336,11 +366,11 @@ def mostrar_niveles(condicion_musica:bool):
                         
                         efecto_boton(condicion_musica)
                         time.sleep(0.5)
-                        generar_nivel(2, condicion_musica)
-                            
+                        generar_nivel(2, condicion_musica)              
             else:  
                 PANTALLA.blit(button_nivel_medio, rectangulo_vertical2)
 
+            # Boton nivel dificil
             if rectangulo_vertical3.collidepoint(pos_mouse):
                 imagen_agrandada_3 = pygame.transform.scale(button_nivel_dificil_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada_3, (rectangulo_vertical3_presionado.x - 10, rectangulo_vertical3_presionado.y - 5))  # Ajustar posición
@@ -350,11 +380,11 @@ def mostrar_niveles(condicion_musica:bool):
                         
                         efecto_boton(condicion_musica)
                         time.sleep(0.5)
-                        generar_nivel(3, condicion_musica)
-                            
+                        generar_nivel(3, condicion_musica)                
             else:  
                 PANTALLA.blit(button_nivel_dificil, rectangulo_vertical3)
             
+            # Boton salir
             if rectangulo_vertical4.collidepoint(pos_mouse):
                 imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical4_presionado.x - 10, rectangulo_vertical4_presionado.y - 5))  # Ajustar posición
@@ -364,8 +394,7 @@ def mostrar_niveles(condicion_musica:bool):
                         
                         efecto_boton(condicion_musica)
                         time.sleep(0.5)
-                        mostrar_menu()
-                        
+                        mostrar_menu()             
             else:  
                 PANTALLA.blit(button_salir, rectangulo_vertical4)
 
@@ -375,16 +404,22 @@ def mostrar_niveles(condicion_musica:bool):
 
 
 def mostrar_puntajes (condicion_musica:bool):
+    
+    """
+    Muestra los puntajes de los jugadores en el juego, permitiendo ver los tres mejores puntajes y salir al menú principal.
+    
+    Args:
+    condicion_musica: Determina si se reproduce la música ambiental o no. Si es True, se reproduce la música ambiental, si es False no se reproduce.
+
+    Returns:
+    None
+
+    """
+    
     # Inicialización
     pygame.init()
     mixer.init()
 
-  
-    """
-    #Efecto boton.
-    efecto_button = mixer.Sound('C:/Users/Matias/Desktop/recursos_musica/ruido_boton.mp3')
-    efecto_button.set_volume(0.4)
-    """
 
     # Cargar imágenes
     imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
@@ -419,12 +454,16 @@ def mostrar_puntajes (condicion_musica:bool):
         clock.tick(FPS)
         
         for evento in pygame.event.get():
-
+            
+            
             PANTALLA.blit(imagen_fondo, (0, 0))
             PANTALLA.blit(lista_puntaje, rectangulo_vertical)
 
-            pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
+            # Devuelve (x, y)
+            pos_mouse = pygame.mouse.get_pos()  
 
+            # Verificar colisión con un rectángulo (botón, imagen, etc.)
+            # Boton salir
             if rectangulo_vertical2.collidepoint(pos_mouse):
                 imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical2_presionado.x - 10, rectangulo_vertical2_presionado.y - 5))  # Ajustar posición
@@ -438,13 +477,15 @@ def mostrar_puntajes (condicion_musica:bool):
             else:  
                 PANTALLA.blit(button_salir, rectangulo_vertical2)
 
-
+            # Cargar los datos del archivo JSON
             with open('C:/Users/Matias/Desktop/segundo_parcial/pygame/archivos_json/puntajes.json', 'r') as archivo_json:
                 datos = json.load(archivo_json)
 
+            # Mostrar el título de la lista de puntajes
             jugador_1 = str(datos.get('nombre_1')) + " " + str(datos.get('puntaje_1'))
             jugador_2 = str(datos.get('nombre_2')) + " " + str(datos.get('puntaje_2'))
             jugador_3 = str(datos.get('nombre_3')) + " " + str(datos.get('puntaje_3'))
+
             # Mostrar los puntajes de los jugadores
             mostrar_puntaje_jugadores_top_3(PANTALLA, jugador_1, 1)
             mostrar_puntaje_jugadores_top_3(PANTALLA, jugador_2, 2)
@@ -454,8 +495,22 @@ def mostrar_puntajes (condicion_musica:bool):
             pygame.display.flip()  
 
 
-def mostrar_puntaje_jugadores_top_3(PANTALLA, texto: str, top: int):
-    # Carga de imágenes (como ya tienes)
+def mostrar_puntaje_jugadores_top_3(PANTALLA:pygame.Surface, texto: str, top: int):
+    
+    """
+    Muestra el puntaje de los jugadores en la pantalla mediente imagenes, permitiendo ver los tres mejores puntajes.
+    
+    Args:
+    PANTALLA: Superficie de Pygame donde se dibujarán los puntajes.
+    texto: Texto que representa el puntaje del jugador.
+    top: Indica la posición en pantalla del jugador en el ranking (1, 2 o 3).
+
+    Returns:
+    None
+
+    """
+
+    # Carga de imágenes 
     texto_A = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_A_png.png')
     texto_A = pygame.transform.scale(texto_A, (30, 40))
     texto_B = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_B_png.png')
@@ -553,9 +608,11 @@ def mostrar_puntaje_jugadores_top_3(PANTALLA, texto: str, top: int):
         pos_x = 400
         pos_y = 320
 
-    str_puntaje = str(texto).upper()  # Asegura mayúsculas
+    # Asegura mayúsculas
+    str_puntaje = str(texto).upper()  
     ancho_letra = 20
-    espacio = 5  # Espacio entre caracteres
+    # Espacio entre caracteres
+    espacio = 5  
 
     ancho_total = len(str_puntaje) * (ancho_letra + espacio)
     pos_x_inicial = pos_x - ancho_total // 2
@@ -563,7 +620,8 @@ def mostrar_puntaje_jugadores_top_3(PANTALLA, texto: str, top: int):
     for i, digito in enumerate(str_puntaje):
         x = pos_x_inicial + i * (ancho_letra + espacio)
         if digito == ' ':
-            continue  # Deja espacio vacío
+            # Deja espacio vacío
+            continue  
         imagen = letras.get(digito)
         if imagen:
             # Ajusta la altura para números (más chicos)
@@ -573,19 +631,28 @@ def mostrar_puntaje_jugadores_top_3(PANTALLA, texto: str, top: int):
                 PANTALLA.blit(imagen, (x, pos_y))
 
 
-
 def generar_nivel(tipo_nivel: int, condicion_musica:bool):
+    
+    """
+    Muestra el nivel seleccionado por el usuario y comienza el juego, permitiendo al jugador jugar en diferentes niveles de dificultad (fácil, medio o difícil).
+    
+    Args:
+    tipo_nivel: Entero que indica el nivel de dificultad seleccionado por el usuario (1 para fácil, 2 para medio, 3 para difícil).
+    condicion_musica: Determina si se reproduce la música ambiental o no. Si es True, se reproduce la música ambiental, si es False no se reproduce.
+
+    Returns:
+    None
+
+    """
+    
     # Inicialización
     pygame.init()
     mixer.init()
 
+    # Reproducir música ambiental si la condición es True
+    musica_jugando(condicion_musica)
     
-    
-    if condicion_musica:   
-        mixer.music.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/musica_jugando.mp3')
-        mixer.music.set_volume(0.4)  
-        mixer.music.play(-1)
-
+    # Cargar efectos de sonido
     efecto_ganaste = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_de_ganaste.mp3')
     efecto_ganaste.set_volume(0.4)
     
@@ -601,6 +668,7 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
     efecto_golpe_hundido_2 = mixer.Sound('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_musica/ruido_señal.mp3')
     efecto_golpe_hundido_2.set_volume(5.0)
 
+    # Cargar imágenes
     button_salir = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png.png')
     button_salir = pygame.transform.scale(button_salir, (200, 70))
     button_salir_presionado = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/button_salir_png_presionado.png')
@@ -617,22 +685,9 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
     rectangulo_vertical = button_reiniciar.get_rect(x=170, y=680)
     rectangulo_vertical_presionado = button_reiniciar_presionado.get_rect(x=170, y=680)
 
+    imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
+    imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 800))
 
-
-    # Obtener ruta base del proyecto (independiente del usuario)
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    
-    # Cargar recursos con rutas relativas
-    try:
-
-        # Imagen de fondo
-        fondo_path = os.path.join(base_path, 'recursos_png', 'fondo_menu_png.png')
-        imagen_fondo = pygame.image.load(fondo_path)
-        imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 800))
-    except Exception as e:
-        print(f"Error cargando recursos: {e}")
-        pygame.quit()
-        sys.exit()
 
     # Configuración de pantalla
     ANCHO, ALTO = 800, 800
@@ -649,18 +704,23 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
     else:  # tipo_nivel == 3
         filas, columnas = 40, 40  # Reducido de 40x40 para mejor visualización
 
-    # Crear y poblar matriz
+    # Crear y poblar con barcos la matriz
     matriz = iniciar_matriz(filas, columnas, 0)
     matriz, posiciones_barcos = colocar_barcos(matriz, tipo_nivel)
 
     for fila in matriz:
         print(fila)
 
+    # Inicializar la matriz del jugador
+    # Esta matriz se usará para marcar los disparos del jugador
     matriz_jugador = iniciar_matriz(filas, columnas, 0)
 
 
-    coordenadas_barcos = []
+    
     coordenadas_y_recoridas = []
+
+    # Obtener las coordenadas de los barcos
+    coordenadas_barcos = []
 
     for i in range(filas):
         for x in range(columnas):
@@ -668,7 +728,7 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
                 coordenadas_barcos.append((i,x))
                 
                 
-
+    # Calcular el tamaño de las casillas del tablero
     margen = 2
     ancho_casilla = min(
         (500 - (columnas + 1) * margen) // columnas,
@@ -697,9 +757,10 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
            
 
             
-
+            # Devuelve (x, y)
             pos_mouse = pygame.mouse.get_pos()
-        
+                    
+            # Obtener la celda en la que se hizo clic
             celda = obtener_celda_click(
                 pos_mouse[0], 
                 pos_mouse[1],
@@ -714,24 +775,29 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
             
 
 
-
+            # Verificar si se hizo clic en una celda válida
             if celda:
+                
                 fila, columna = celda
 
                 if evento.type == pygame.MOUSEBUTTONDOWN:
                     print("presiona")
 
+                    # Verificar si la celda ya fue recorrida
                     if (fila, columna) in coordenadas_y_recoridas:
                         condicion = False
                     else:
                         condicion = True
 
+                    
                     if condicion:
+                        # Verificar si la celda contiene algun barco en esa coordenada
                         if (fila, columna) in coordenadas_barcos:
                             matriz_jugador[fila][columna] += 1
                             puntaje_jugador += 5
-
+                            # Verificar si se hundió un barco
                             condicion_hundimiento, tamaño_hundido = verificar_hundidos(matriz_jugador, posiciones_barcos)
+                            # Se agrega la coordenada a las ya recorridas
                             coordenadas_y_recoridas.append((fila, columna))
                             condicion_efecto = True
                         else:
@@ -744,10 +810,12 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
                             condicion_hundimiento = False
                             puntaje_jugador += (tamaño_hundido * 10)
 
+                            # Verificar si todos los barcos han sido hundidos
                             if todos_barcos_hundidos(coordenadas_barcos, matriz_jugador):
                                 if condicion_musica:
                                     efecto_ganaste.play()
                                 time.sleep(2.0)
+                                # Mostrar pantalla de ingreso de nombre del jugador
                                 ingresar_nombre_jugador(PANTALLA, condicion_musica, puntaje_jugador, tipo_nivel)
 
                         elif condicion_efecto:
@@ -763,27 +831,14 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
                     print("puntaje jugador:", puntaje_jugador)
 
 
-
-
-
-
-
-
-
-
-
-
-                            
-                           
-
-
-
-            # Dibujar
+            
             PANTALLA.blit(imagen_fondo, (0, 0))
+
+            # Dibujar el tablero del jugador
             dibujar_tablero(matriz_jugador, filas, columnas, 500, 500, PANTALLA)
 
-            
-
+            # Verificar colisión con un rectángulo (botón, imagen, etc.)
+            # Boton salir
             if rectangulo_vertical4.collidepoint(pos_mouse):
                 imagen_agrandada_4 = pygame.transform.scale(button_salir_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada_4, (rectangulo_vertical4_presionado.x - 10, rectangulo_vertical4_presionado.y - 5))  # Ajustar posición
@@ -798,7 +853,7 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
             else:  
                 PANTALLA.blit(button_salir, rectangulo_vertical4)
 
-            
+            # Boton reiniciar
             if rectangulo_vertical.collidepoint(pos_mouse):
                 imagen_agrandada = pygame.transform.scale(button_reiniciar_presionado, (220, 80))  # +20px
                 PANTALLA.blit(imagen_agrandada, (rectangulo_vertical_presionado.x - 10, rectangulo_vertical_presionado.y - 5))  # Ajustar posición
@@ -818,14 +873,30 @@ def generar_nivel(tipo_nivel: int, condicion_musica:bool):
 
             pygame.display.flip()
 
-def ingresar_nombre_jugador(PANTALLA, condicion_efecto, puntaje_jugador, tipo_nivel):
-    
 
+def ingresar_nombre_jugador(PANTALLA:pygame.Surface, condicion_efecto:bool, puntaje_jugador:str, tipo_nivel:int):
+    
+    """
+    Muestra una pantalla para que el jugador ingrese su nombre y registre su puntaje, permitiendo al jugador guardar su puntaje después de completar un nivel.
+    
+    Args:
+    PANTALLA: Superficie de Pygame donde se dibujará la pantalla de ingreso de nombre.
+    condicion_efecto: Determina si se reproduce el efecto de sonido al presionar el botón de ingreso de nombre. Si es True, se reproduce el efecto de sonido, si es False no se reproduce.
+    puntaje_jugador: Puntaje del jugador que se registrará.
+    tipo_nivel: Entero que indica el nivel de dificultad del juego (1 para fácil, 2 para medio, 3 para difícil).
+
+    Returns:
+    None
+
+    """
+
+    # Configuración de pantalla
     ANCHO, ALTO = 800, 400
     PANTALLA = pygame.display.set_mode((ANCHO, ALTO),pygame.NOFRAME)
     FPS = 20
     clock = pygame.time.Clock()
     
+    # Cargar imágenes
     boton_enter = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/boton_enter_png.png')
     boton_enter = pygame.transform.scale(boton_enter, (200, 70))
 
@@ -834,8 +905,6 @@ def ingresar_nombre_jugador(PANTALLA, condicion_efecto, puntaje_jugador, tipo_ni
     
     tabla_texto = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/cuadro_texto_png.png')
     tabla_texto = pygame.transform.scale(tabla_texto, (450, 100))
-    
-    
 
     imagen_fondo = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/fondo_menu_png.png')
     imagen_fondo = pygame.transform.scale(imagen_fondo, (800, 600))
@@ -851,27 +920,27 @@ def ingresar_nombre_jugador(PANTALLA, condicion_efecto, puntaje_jugador, tipo_ni
         for evento in pygame.event.get():
             
             if evento.type == pygame.KEYDOWN:
-                
-                if len(nombre_jugador) <= 3:  # Limitar a 4 caracteres
+                # Limitar a 4 caracteres
+                if len(nombre_jugador) <= 3:  
                     if evento.unicode.isalpha():
                         print(f"Letra presionada: {evento.unicode}")
-                        nombre_jugador += evento.unicode.upper()  # Convertir a mayúscula
+                        # Convertir a mayúscula
+                        nombre_jugador += evento.unicode.upper()  
                     
                 if evento.key == pygame.K_BACKSPACE:
-                        nombre_jugador = nombre_jugador[:-1]  # Borrar último carácter
-
-                
-            
+                    # Borrar último carácter
+                    nombre_jugador = nombre_jugador[:-1]   
         
-
-        pos_mouse = pygame.mouse.get_pos()  # Devuelve (x, y)
-            # Verificar colisión con un rectángulo (botón, imagen, etc.)
+        # Devuelve (x, y)
+        pos_mouse = pygame.mouse.get_pos()  
+            
 
         PANTALLA.blit(imagen_fondo, (0, 0))
 
         PANTALLA.blit(tabla_texto, (170, 150))
 
-
+        
+        # Verificar colisión con un rectángulo (botón, imagen, etc.)
         #Boton nivel
         if rectangulo_vertical.collidepoint(pos_mouse):
             imagen_agrandada = pygame.transform.scale(boton_enter_presionando, (220, 80))  # +20px
@@ -897,13 +966,26 @@ def ingresar_nombre_jugador(PANTALLA, condicion_efecto, puntaje_jugador, tipo_ni
         pygame.display.flip()
         
 
-   
+def registrar_puntaje(puntaje_jugador:str, nombre_jugador:str, nivel:int):
 
-def registrar_puntaje(puntaje_jugador, nombre_jugador, nivel):
+    """
+    Registra el puntaje del jugador en un archivo JSON, permitiendo que los jugadores guarden sus puntajes después de completar un nivel.
+    
+    Args:
+    puntaje_jugador: Puntaje del jugador que se registrará.
+    nombre_jugador: Nombre del jugador que se registrará.
+    nivel: Entero que indica el nivel de dificultad del juego (1 para fácil, 2 para medio, 3 para difícil).
 
+    Returns:
+    None
+
+    """
+
+    # Cargar los datos del archivo JSON
     with open('C:/Users/Matias/Desktop/segundo_parcial/pygame/archivos_json/puntajes.json', 'r') as archivo_json:
         datos = json.load(archivo_json)
     
+    # Verificar si el puntaje del jugador es mayor que los puntajes actuales
     if puntaje_jugador >= int(datos["puntaje_1"]):
         # Desplazar todos hacia abajo
         datos["puntaje_3"] = datos["puntaje_2"]
@@ -942,91 +1024,75 @@ def registrar_puntaje(puntaje_jugador, nombre_jugador, nivel):
         json.dump(datos, archivo, indent=4)  # indent=4 para formato legible
 
 
+def mostrar_texto_pantalla(texto:str, PANTALLA:pygame.Surface):
 
-def mostrar_texto_pantalla(texto, PANTALLA):
+    """
+    Genera y muestra el texto en pantalla utilizando imágenes de letras, permitiendo que el jugador vea su nombre ingresado en la pantalla de registro de puntajes.
+    
+    Args:
+    texto: Texto que se mostrará en pantalla.
+    PANTALLA: Superficie de Pygame donde se dibujará el texto
 
-   
+    Returns:
+    None
 
+    """
+    # Cargar imágenes de letras
     texto_A = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_A_png.png')
     texto_A = pygame.transform.scale(texto_A, (50, 60))
-    
     texto_B = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_B_png.png')
     texto_B = pygame.transform.scale(texto_B, (50, 60))
-
     texto_C = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_C_png.png')
     texto_C = pygame.transform.scale(texto_C, (50, 60))
-
     texto_D = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_D_png.png')
     texto_D = pygame.transform.scale(texto_D, (50, 60))
-
     texto_E = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_E_png.png')
     texto_E = pygame.transform.scale(texto_E, (50, 60))
-
     texto_F = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_F_png.png')
     texto_F = pygame.transform.scale(texto_F, (50, 60))
-
     texto_G = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_G_png.png')
     texto_G = pygame.transform.scale(texto_G, (50, 60))
-
     texto_H = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_H_png.png')
     texto_H = pygame.transform.scale(texto_H, (50, 60))
-
     texto_I = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_I_png.png')
     texto_I = pygame.transform.scale(texto_I, (50, 60))
-
     texto_J = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_J_png.png')
     texto_J = pygame.transform.scale(texto_J, (50, 60))
-
     texto_K = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_K_png.png')
     texto_K = pygame.transform.scale(texto_K, (50, 60))
-
     texto_L = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_L_png.png')
     texto_L = pygame.transform.scale(texto_L, (50, 60))
-
     texto_M = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_M_png.png')
     texto_M = pygame.transform.scale(texto_M, (50, 60))
-
     texto_N = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_N_png.png')
     texto_N = pygame.transform.scale(texto_N, (50, 60))
-
     texto_O = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_O_png.png')
     texto_O = pygame.transform.scale(texto_O, (50, 60))
-
     texto_P = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_P_png.png')
     texto_P = pygame.transform.scale(texto_P, (50, 60))
-
     texto_Q = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_Q_png.png')
     texto_Q = pygame.transform.scale(texto_Q, (50, 60))
-
     texto_R = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_R_png.png')
     texto_R = pygame.transform.scale(texto_R, (50, 60))
-
     texto_S = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_S_png.png')
     texto_S = pygame.transform.scale(texto_S, (50, 60))
-
     texto_T = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_T_png.png')
     texto_T = pygame.transform.scale(texto_T, (50, 60))
-
     texto_U = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_U_png.png')
     texto_U = pygame.transform.scale(texto_U, (50, 60))
-
     texto_V = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_V_png.png')
     texto_V = pygame.transform.scale(texto_V, (50, 60))
-
     texto_W = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_W_png.png')
     texto_W = pygame.transform.scale(texto_W, (50, 60))
-
     texto_X = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_X_png.png')
     texto_X = pygame.transform.scale(texto_X, (50, 60))
-
     texto_Y = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_Y_png.png')
     texto_Y = pygame.transform.scale(texto_Y, (50, 60))
-    
     texto_Z = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/caracter_Z_png.png')
     texto_Z = pygame.transform.scale(texto_Z, (50, 60))
 
 
-    # Posición base (como la tenías)
+    # Posición base 
     pos_x = 810
     pos_y = 170
     
@@ -1095,47 +1161,45 @@ def mostrar_texto_pantalla(texto, PANTALLA):
         elif digito == 'Z':
             PANTALLA.blit(texto_Z, (pos_x_inicial + i*50, pos_y))
     
+
+def mostrar_puntaje_pantalla(puntaje_jugador:str, PANTALLA:pygame.Surface):
     
-
+    """
+    Genera y muestra el texto en pantalla utilizando imágenes de letras, permitiendo que el jugador vea su nombre ingresado en la pantalla de registro de puntajes.
     
+    Args:
+    texto: Texto que se mostrará en pantalla.
+    PANTALLA: Superficie de Pygame donde se dibujará el texto
 
+    Returns:
+    None
 
-def mostrar_puntaje_pantalla(puntaje_jugador, PANTALLA):
-    #
+    """
+    
+    # Cargar imágenes de números y símbolos
     texto_simobolo_menos = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/simbolo_menos_png.png')
     texto_simobolo_menos = pygame.transform.scale(texto_simobolo_menos, (60, 70))
-
     texto_cero = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_0_png.png')
     texto_cero = pygame.transform.scale(texto_cero, (70, 70))
-
     texto_uno = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_1_png.png')
     texto_uno = pygame.transform.scale(texto_uno, (70, 70))
-
     texto_dos = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_2_png.png')
     texto_dos = pygame.transform.scale(texto_dos, (70, 70))
-
     texto_tres = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_3_png.png')
     texto_tres = pygame.transform.scale(texto_tres, (70, 70))
-
     texto_cuatro = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_4_png.png')
     texto_cuatro = pygame.transform.scale(texto_cuatro, (70, 70))
-
     texto_cinco = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_5_png.png')
     texto_cinco = pygame.transform.scale(texto_cinco, (70, 70))
-
     texto_seis = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_6_png.png')
     texto_seis = pygame.transform.scale(texto_seis, (70, 70))
-    
     texto_siete = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_7_png.png')
     texto_siete = pygame.transform.scale(texto_siete, (70, 70))
-
     texto_ocho = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_8_png.png')
     texto_ocho = pygame.transform.scale(texto_ocho, (70, 70))
-    
     texto_nueve = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/numero_9_png.png')
     texto_nueve = pygame.transform.scale(texto_nueve, (70, 70))
 
-  
 
     # Posición base (como la tenías)
     pos_x = 810
@@ -1178,36 +1242,47 @@ def mostrar_puntaje_pantalla(puntaje_jugador, PANTALLA):
             PANTALLA.blit(texto_nueve, (pos_x_inicial + i*75, pos_y))
     
     
-
-
-
-
-
-
-
-
-def todos_barcos_hundidos(coordenadas_barcos, matriz_disparos):
+def todos_barcos_hundidos(coordenadas_barcos:list, matriz_disparos:list) -> bool:
+    
     """
-    Versión para lista plana de posiciones
-    Ejemplo: [(1,2), (1,3), (2,5), (3,1), (3,2), (3,3)]
+    Verifica si todos los barcos han sido hundidos en la matriz de disparos.
+    
+    Args:
+    coordenadas_barcos: Lista de tuplas con las coordenadas de los barcos.
+    matriz_disparos: Matriz que representa los disparos realizados, donde 1 indica un disparo exitoso (hundido) y 2 indica un disparo fallido.
+
+    Returns:
+    True si todos los barcos están hundidos, False en caso contrario.
+
     """
+    # Recorre las coordenadas de los barcos
+    # y verifica si todas están marcadas como hundidas (1)
     for fila, columna in coordenadas_barcos:
         if matriz_disparos[fila][columna] != 1:
             return False
     return True
 
-def obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen, offset_x, offset_y):
+
+def obtener_celda_click(x:int, y:int, filas:int, columnas:int, ancho_casilla:int, margen:int, offset_x:int, offset_y:int)-> tuple:
+
     """
-    Versión corregida que considera el tablero centrado
+    Obtiene la celda en la que se hizo clic, considerando el offset y los márgenes.
+    
     Args:
-        x, y: Coordenadas del mouse (píxeles)
-        filas, columnas: Tamaño del tablero
-        ancho_casilla: Ancho de cada celda en píxeles
-        margen: Espacio entre celdas
-        offset_x, offset_y: Desplazamiento del tablero desde los bordes
+    x: Coordenada X del clic.
+    y: Coordenada Y del clic.  
+    filas: Número de filas del tablero.
+    columnas: Número de columnas del tablero.
+    ancho_casilla: Ancho de cada casilla del tablero.
+    margen: Margen entre las casillas.
+    offset_x: Desplazamiento en X del tablero.
+    offset_y: Desplazamiento en Y del tablero.
+
     Returns:
-        Tuple (fila, columna) o None si click fuera del tablero
+    Una tupla (fila, columna) si el clic está dentro del área del tablero, o None si está fuera.
+
     """
+
     # Ajustar coordenadas restando el offset
     x_rel = x - offset_x
     y_rel = y - offset_y
@@ -1226,9 +1301,28 @@ def obtener_celda_click(x, y, filas, columnas, ancho_casilla, margen, offset_x, 
     return None
 
 
+def dibujar_tablero(matriz:list, filas:int, columnas:int, area_ancho:int, area_alto:int, pantalla:pygame.Surface):
+    
+    """
+    Dibuja el tablero de juego en la pantalla, mostrando los barcos, fallos y agua según la matriz proporcionada.
+    
+    Args:
+    matriz: Matriz que representa el estado del tablero, donde:
+        - 0 indica agua,
+        - 1 indica un barco golpeado,
+        - 2 indica un fallo.
+    filas: Número de filas del tablero.
+    columnas: Número de columnas del tablero.
+    area_ancho: Ancho del área del tablero en píxeles.
+    area_alto: Alto del área del tablero en píxeles.
+    pantalla: Superficie de Pygame donde se dibujará el tablero.
 
-def dibujar_tablero(matriz, filas, columnas, area_ancho, area_alto, pantalla):
-    """Dibuja el tablero con imágenes en lugar de colores"""
+    Returns:
+    None
+    Esta función no retorna ningún valor, pero dibuja el tablero en la pantalla proporcionada.
+
+    """
+
     # Cargar las imágenes (hazlo una vez al inicio del juego)
     agua_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/agua_nivel_png.png')
     barco_img = pygame.image.load('C:/Users/Matias/Desktop/segundo_parcial/pygame/recursos_png/barco_golpeado_png.png')
@@ -1252,6 +1346,7 @@ def dibujar_tablero(matriz, filas, columnas, area_ancho, area_alto, pantalla):
     offset_x = (pantalla.get_width() - tablero_ancho) // 2
     offset_y = (pantalla.get_height() - tablero_alto) // 2
 
+    # Dibujar el tablero
     for fila in range(filas):
         for col in range(columnas):
             x = offset_x + (margen + ancho_casilla) * col + margen
@@ -1260,9 +1355,9 @@ def dibujar_tablero(matriz, filas, columnas, area_ancho, area_alto, pantalla):
             # Seleccionar imagen según el estado de la celda
             if matriz[fila][col] == 0:  # Agua
                 pantalla.blit(agua_img, (x, y))
-            elif matriz[fila][col] == 1:  # Fallo
+            elif matriz[fila][col] == 1:  # Barco golpeado
                 pantalla.blit(barco_img, (x, y))
-            else:  # Barco
+            else:  # Fallo
                 pantalla.blit(fallo_img, (x, y))
             
             # Opcional: mantener el borde negro
@@ -1270,29 +1365,22 @@ def dibujar_tablero(matriz, filas, columnas, area_ancho, area_alto, pantalla):
             pygame.draw.rect(pantalla, (0, 0, 0), rect, 1)
 
         
-
-
-
-
-
-
-def mostrar_matriz(matriz_barcos):
-    # Recorre cada fila de la matriz
-    for i in range(len(matriz_barcos)):
-        # Recorre cada elemento de la fila actual
-        for j in range(len(matriz_barcos[i])):                
-            # Imprime el elemento sin salto de línea, dejando un espacio entre elementos
-            print(matriz_barcos[i][j], end=" ")
-        # Cuando termina la fila, imprime un salto de línea
-        print("")
-
-
-
-
 def iniciar_matriz(cant_filas:int, cant_columnas:int, valor_inicial: any) -> list:
-    #esta funcion tiene la tarea de crear una matriz vacía
-    #recibe cant_filas, cant_columnas y un valor con el cual rellenar
-    #retornará una matriz
+    
+    """
+    Inicializa una matriz de tamaño `cant_filas` x `cant_columnas` con un valor inicial.
+    
+    Args:
+    cant_filas: Número de filas de la matriz.
+    cant_columnas: Número de columnas de la matriz.
+    valor_inicial: Valor con el que se inicializarán todas las celdas de la matriz.
+
+    Returns:
+    None
+    Esta función no retorna ningún valor, pero dibuja el tablero en la pantalla proporcionada.
+
+    """
+
     matriz= []
     for i in range(cant_filas):
         fila = [valor_inicial] * cant_columnas
@@ -1301,10 +1389,21 @@ def iniciar_matriz(cant_filas:int, cant_columnas:int, valor_inicial: any) -> lis
     return matriz
 
 
-
-
-def colocar_barcos(matriz, dificultad):
+def colocar_barcos(matriz:list, dificultad:int) -> tuple:
     
+    """
+    Coloca barcos en la matriz de juego según la dificultad seleccionada.
+    
+    Args:
+    matriz: Matriz que representa el tablero de juego, donde se colocarán los barcos.
+    dificultad: Entero que indica el nivel de dificultad del juego (1 para fácil, 2 para medio, 3 para difícil).
+
+    Returns:
+    
+    - matriz_modificada: Matriz con los barcos colocados.
+    - posiciones_barcos: Diccionario con las posiciones de los barcos colocados.
+
+    """
     
     filas = len(matriz)
     columnas = len(matriz[0])
@@ -1394,22 +1493,19 @@ def colocar_barcos(matriz, dificultad):
     return matriz, posiciones_barcos
 
 
-
-
-def verificar_hundidos(matriz_disparos, posiciones_barcos):
+def verificar_hundidos(matriz_disparos:list, posiciones_barcos:list) -> tuple:
     """
-    Verifica si algún barco ha sido completamente hundido
+    Verifica si algún barco ha sido hundido en la matriz de disparos y devuelve el estado del hundimiento.
     
     Args:
-        matriz_disparos: Matriz con 0 (no disparado), 1 (impacto), 2 (fallo)
-        posiciones_barcos: Diccionario de barcos y sus posiciones
-                         {'submarino': [[(f1,c1)], [(f2,c2)], ...],
-                          'destructor': [[(f3,c3), (f4,c4)], ...]}
-    
+    matriz_disparos: Matriz que representa los disparos realizados, donde 1 indica un disparo exitoso (hundido) y 2 indica un disparo fallido.
+    posiciones_barcos: Diccionario que contiene las posiciones de los barcos, donde cada clave es
+
     Returns:
-        tuple: (bool_hundido, tamaño_barco_hundido)
-               - bool_hundido: True si se hundió al menos un barco
-               - tamaño_barco_hundido: Número de celdas del barco hundido (0 si no hubo hundimiento)
+    Una tupla (hundido, tamaño_hundido) donde:
+    - hundido: Booleano que indica si algún barco ha sido hundido.
+    - tamaño_hundido: Entero que indica el tamaño del barco hundido.
+
     """
     hundido = False
     tamaño_hundido = 0
